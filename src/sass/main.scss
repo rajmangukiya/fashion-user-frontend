@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    list-style: none !important;
+    // text-decoration: none !important;
+    scroll-behavior: smooth;
+    transition: all 0.1s;
+    border: none;
+    background: none;
+    transition-duration: 500ms;
+}
+
+*:focus {
+    outline: none;
+}
+
+.item-container {
+    width: 150px;
+    margin: 0px 10px 10px 10px;
+    cursor: pointer;
+}
+
+// ********* item page ************
+
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery {
+    width: 300px;
+}
+
+// ************************************
+
+@media (min-width: 576px) {
+    .item-container {
+        width: 250px;
+        margin: 0px 30px 10px 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    .item-container {
+        width: 250px;
+        margin: 0px 20px 10px 20px;
+    }
+
+    .gallery-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .gallery {
+        width: 300px;
+        margin-right: 50px;
+    }
+}
+
+@media (min-width: 992px) {
+    .gallery {
+        width: 350px;
+        margin-right: 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .gallery {
+        width: 400px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .gallery {
+        width: 450px;
+    }
+}
+
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+// @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+// @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
