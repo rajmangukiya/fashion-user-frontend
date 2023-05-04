@@ -5,5 +5,5 @@ import Item from '../pages/Item'
 export {
     Home,
     Category,
-    Item
+    Item,
 }

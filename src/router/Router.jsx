@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Layout from '../layout'
-import { Category, Home, Item } from '../pages'
+import { Category, Home, Item, Playground } from '../pages'
 
 const Router = () => {
-
-
-
     return (
         <div>
             <Layout>

@@ -11,15 +11,23 @@ const Home = () => {
             image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
         },
         {
-            name: 'Saree',
+            name: 'Lahenga',
             image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
         },
         {
-            name: 'Saree',
+            name: 'Dress',
             image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
         },
         {
-            name: 'Saree',
+            name: 'Gown',
+            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
+        },
+        {
+            name: 'Kurti',
+            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
+        },
+        {
+            name: 'Western Kurti',
             image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
         },
     ]
@@ -123,7 +131,7 @@ const Home = () => {
 
             {/* New Arrivel */}
             <div className='d-flex flex-column align-items-center'>
-                <h2 className='my-4'>New Arrivel</h2>
+                <h2 className='my-4'>New Arrivals</h2>
                 <div className='d-flex w-100 justify-content-center flex-wrap'>
                     {
                         items.map(item => (
@@ -137,6 +145,7 @@ const Home = () => {
                                     <p className='text-center fs-5 text-danger'>{item.price}₹</p>
                                 </div>
                             </div>
+                            
                         ))
                     }
                 </div>
@@ -146,3 +155,4 @@ const Home = () => {
 }
 
 export default Home
+
