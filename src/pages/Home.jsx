@@ -1,8 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Card, Button } from 'react-bootstrap';
+import { add, saveToLocal } from '../store/cartSlice';
+import STORAGEKEY from '../config/storageKey.js';
+import AuthStorage from '../utils/AuthStorage';
+
 
 const Home = () => {
 
+    const dispatch = useDispatch();
+    const [items, setItems] = useState([]);
+    const cart = [];
     const navigate = useNavigate();
 
     const categories = [
@@ -32,45 +41,6 @@ const Home = () => {
         },
     ]
 
-    const items = [
-        {
-            name: 'Reception Wear Saree',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png',
-            mrp: 1599,
-            price: 999
-        },
-        {
-            name: 'Reception Wear Saree',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png',
-            mrp: 1599,
-            price: 999
-        },
-        {
-            name: 'Reception Wear Saree',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png',
-            mrp: 1599,
-            price: 999
-        },
-        {
-            name: 'Reception Wear Saree',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png',
-            mrp: 1599,
-            price: 999
-        },
-        {
-            name: 'Reception Wear Saree',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png',
-            mrp: 1599,
-            price: 999
-        },
-        {
-            name: 'Reception Wear Saree',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png',
-            mrp: 1599,
-            price: 999
-        },
-    ]
-
     const openCategory = (name) => {
         navigate(`/category/${name}`)
     }
@@ -79,10 +49,26 @@ const Home = () => {
         navigate(`/item/${id}`);
     }
 
+    const fetchItems = async () => {
+        const res = await fetch("https://fakestoreapi.com/products");
+        const data = await res.json();
+        setItems(data);
+    }
+    
     useEffect(() => {
-
+        fetchItems();
     }, [])
-
+    
+    const addToCart = async (item) => {
+        try {
+            cart.push(item);
+            AuthStorage.setStorageJsonData(STORAGEKEY.token, cart, true);
+            await dispatch(add(item));
+            } 
+            catch (error) {
+            console.log(error);
+          }
+    }
     return (
         <div>
             {
@@ -99,7 +85,7 @@ const Home = () => {
                 <div className='d-flex w-100 justify-content-center flex-wrap'>
                     {
                         categories.map(category => (
-                            <div onClick={() => openCategory(category.name)} className='item-container'>
+                            <div key={category.id} onClick={() => openCategory(category.name)} className='item-container'>
                                 <img className='w-100' src={category.image} />
                                 <p className='text-center fs-4 text-dark'>{category.name}</p>
                             </div>
@@ -114,7 +100,7 @@ const Home = () => {
                 <div className='d-flex w-100 justify-content-center flex-wrap'>
                     {
                         items.map(item => (
-                            <div onClick={() => openItem()} className='item-container'>
+                            <div key={item.id} onClick={() => openItem()} className='item-container'>
                                 <img className='w-100' src={item.image} />
                                 <p className='text-center fs-5 mt-2 mb-0 text-dark'>{item.name}</p>
                                 <div className='d-flex mt-0 mb-3 justify-content-center align-items-center'>
@@ -135,17 +121,18 @@ const Home = () => {
                 <div className='d-flex w-100 justify-content-center flex-wrap'>
                     {
                         items.map(item => (
-                            <div onClick={() => openItem()} className='item-container'>
-                                <img className='w-100' src={item.image} />
-                                <p className='text-center fs-5 mt-2 mb-0 text-dark'>{item.name}</p>
-                                <div className='d-flex mt-0 mb-3 justify-content-center align-items-center'>
-                                    <p className='text-center text-muted me-3'>
-                                        <del>{item.mrp}₹</del>
-                                    </p>
-                                    <p className='text-center fs-5 text-danger'>{item.price}₹</p>
-                                </div>
-                            </div>
-                            
+                            <>
+                                <Card key={item.id} style={{ width: '18rem' }}>
+                                    <Card.Img variant="top" src={item.image} />
+                                    <Card.Body>
+                                        <Card.Title>{item.name}</Card.Title>
+                                            <Card.Text>
+                                                Some
+                                            </Card.Text>
+                                        <Button onClick={() => addToCart(item)} variant="primary">Add to Cart</Button>
+                                    </Card.Body>
+                                </Card>
+                            </>
                         ))
                     }
                 </div>

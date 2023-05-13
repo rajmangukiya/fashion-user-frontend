@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { ApiPostNoAuth } from '../utils/ApiData.js'
 
+
 const Item = () => {
 
     const [itemCount, setItemCount] = useState(0);
@@ -31,8 +32,8 @@ const Item = () => {
         setItemCount(prev => prev + 1);
     }
 
-    const addToCart = () => {
-        setItemCount(0);
+    const addToCart = (item, itemCount) => {
+        
     }
 
     const loadScript = (src) => {
@@ -49,7 +50,7 @@ const Item = () => {
         })
     }
 
-    const buyNow =async  () => {
+    const buyNow = async  () => {
         try {
             await loadScript('https://checkout.razorpay.com/v1/checkout.js')
             const { data } = await ApiPostNoAuth('payment/createRazorpayOrder', {amount: 500})
@@ -114,7 +115,7 @@ const Item = () => {
                             <div className='fs-4'>{itemCount}</div>
                             <button onClick={increaseCount} className='px-4 fs-3'>+</button>
                         </div>
-                        <button onClick={addToCart} className='px-4 fs-5 bg-dark text-light ms-3'>Add To Cart</button>
+                        <button onClick={() => addToCart(item, itemCount)} className='px-4 fs-5 bg-dark text-light ms-3'>Add To Cart</button>
                     </div>
                     <button onClick={buyNow} className='px-4 py-2 mt-3 fs-5 bg-dark text-light'>Buy Now</button>
                 </div>
