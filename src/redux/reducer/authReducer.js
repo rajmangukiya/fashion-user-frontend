@@ -25,7 +25,6 @@ export const userDataSlice = createSlice({
       state.isLogged = false
     },
     getUserData: (state) => {
-      console.log("chale 6")
       ApiGet("user/GetUser")
         .then((res) => {
           state.userData = res

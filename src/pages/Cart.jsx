@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Card, Button } from 'react-bootstrap';
-import { remove } from '../store/cartSlice'
+import { remove } from '../redux/reducer/cartReducer'
 
 const Cart = () => {
     const cartedItems = useSelector(state => state.cart);
@@ -14,7 +14,7 @@ const Cart = () => {
     }
 
   return (
-    <div className='d-flex flex-column align-items-center'>
+    <div className='d-flex flex-column align-items-center h-100 bg-dark'>
         <h3>Cart</h3>
         <div className='d-flex w-100 justify-content-center flex-wrap'>
             {cartedItems.map(item => (

@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Layout from '../layout'
 import { Category, Home, Item, Cart, Login } from '../pages'
-import SubRouter from './SubRouter'
 
-const Router = () => {
+const SubRouter = () => {
     return (
         <div>
             <Layout>
@@ -20,4 +19,4 @@ const Router = () => {
     )
 }
 
-export default Router
+export default SubRouter

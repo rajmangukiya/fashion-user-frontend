@@ -2,44 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Card, Button } from 'react-bootstrap';
-import { add, saveToLocal } from '../store/cartSlice';
+import { add } from '../redux/reducer/cartReducer';
 import STORAGEKEY from '../config/storageKey.js';
 import AuthStorage from '../utils/AuthStorage';
+import { ApiGet } from '../utils/ApiData.js'
 
 
 const Home = () => {
 
     const dispatch = useDispatch();
     const [items, setItems] = useState([]);
+    const [categories, setCategories] = useState([]);
     const cart = [];
     const navigate = useNavigate();
-
-    const categories = [
-        {
-            name: 'Saree',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
-        },
-        {
-            name: 'Lahenga',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
-        },
-        {
-            name: 'Dress',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
-        },
-        {
-            name: 'Gown',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
-        },
-        {
-            name: 'Kurti',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
-        },
-        {
-            name: 'Western Kurti',
-            image: 'https://sastabazzars.in/wp-content/uploads/2022/09/SAREES-306x456-1.png'
-        },
-    ]
 
     const openCategory = (name) => {
         navigate(`/category/${name}`)
@@ -49,26 +24,35 @@ const Home = () => {
         navigate(`/item/${id}`);
     }
 
+    const fetchCategories = async () => {
+        const {data} = await ApiGet("category/getcategories");
+        console.log("categories", data);
+        setCategories(data);
+    }
+
     const fetchItems = async () => {
-        const res = await fetch("https://fakestoreapi.com/products");
-        const data = await res.json();
+        const {data} = await ApiGet("item/getItems?category=ALL");
+        console.log("items", data);
         setItems(data);
     }
     
     useEffect(() => {
         fetchItems();
+        fetchCategories()
     }, [])
     
     const addToCart = async (item) => {
         try {
+
             cart.push(item);
             AuthStorage.setStorageJsonData(STORAGEKEY.token, cart, true);
-            await dispatch(add(item));
-            } 
+            dispatch(add(item));
+        } 
             catch (error) {
             console.log(error);
-          }
+        }
     }
+    
     return (
         <div>
             {
