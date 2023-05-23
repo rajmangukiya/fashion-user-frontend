@@ -1,0 +1,3 @@
+.carousel-item {
+    flex: 0 0 33.33%; /* Adjust the width based on the number of items you want to display */
+  }

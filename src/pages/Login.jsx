@@ -33,7 +33,7 @@ const Login = () => {
   return (
     <div className=''>
       <div>
-        <div>LOGIN</div>\
+        <div>LOGIN</div>
         <div>
           <label for='mobile'>Mobile Number</label>
           <input id='mobile' type='text'></input>
