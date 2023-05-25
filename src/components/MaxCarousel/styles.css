@@ -1,3 +1,88 @@
-.carousel-item {
-    flex: 0 0 33.33%; /* Adjust the width based on the number of items you want to display */
+.carousel-container{
+  margin: 20px 20px;
+  margin-top: 0px;
+  margin-right: 66px;
+}
+
+.carousel{
+  width: 150px
+}
+
+.max-collection-image {
+  width: 100%;
+  height: 100%;   
+  object-fit: cover;
+}
+
+.max-collection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  opacity: 1;
+  padding-bottom: 20px;
+}
+
+.max-collection-card-text-back {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #fff;
+  opacity: 0.7;
+}
+
+.max-collection-card-text {
+  opacity: 1;
+  margin-bottom: 0px;
+}
+
+
+.max-collection-card-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #A28E69;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 2160px) and (min-width: 600px){
+  /* .max-collection-card-button {
+    padding: 10px 25px;
+  } */
+
+  .max-collection-card {
+    position: relative;
+    display: inline-block;
+    width: 470px;
+    height: 600px;
+    margin: 15px 0px;
   }
+}
+
+@media only screen and (max-width: 600px) {
+  .max-carousel-container{
+      margin: 10px 10px;
+  }
+  .max-collection-card-button {
+      padding: 10px 10px;
+  }
+
+  .max-collection-card {
+      position: relative;
+      display: inline-block;
+      width: 150px;
+      height: 300px;
+      margin: 15px 0px;
+  }
+}
