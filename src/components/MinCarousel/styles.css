@@ -1,11 +1,6 @@
-.carousel-container{
-    margin: 20px 20px;
-    margin-top: 0px;
-    margin-right: 66px;
-}
 
-.carousel{
-    width: 150px
+.max-carousel{
+    width: 100%
 }
 
 .collection-image {
@@ -64,7 +59,7 @@
     .collection-card {
       position: relative;
         display: inline-block;
-        width: 470px;
+        width: 300px;
         height: 600px;
         margin: 15px 0px;
     }

@@ -6,7 +6,8 @@ import { add } from '../redux/reducer/cartReducer';
 import STORAGEKEY from '../config/storageKey.js';
 import AuthStorage from '../utils/AuthStorage';
 import { ApiGet } from '../utils/ApiData.js';
-import { MaxCarousel, MinCarousel } from '../components';
+import { MaxCarousel } from '../components';
+import { MinCarousel } from '../components';
 
 const Home = () => {
 
@@ -74,10 +75,13 @@ const Home = () => {
             }
             
             {/* All Collections Carousel */}
+            <MaxCarousel categories={categories} />
+
+            {/* New Arrivals Section */}
             <div style={{textAlign: 'center'}}>
                 <h4>All Collection</h4>
-            </div>
-            <MinCarousel categories={categories} />
+            </div>  
+            <MinCarousel categories={categories}/>
             {/* Category */}
             {/* <div className='d-flex flex-column align-items-center'>
                 <h2 className='my-4'>Shop By Category</h2>
