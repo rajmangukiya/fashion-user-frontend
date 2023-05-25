@@ -5,8 +5,8 @@ import { Card, Button } from 'react-bootstrap';
 import { add } from '../redux/reducer/cartReducer';
 import STORAGEKEY from '../config/storageKey.js';
 import AuthStorage from '../utils/AuthStorage';
-import { ApiGet } from '../utils/ApiData.js'
-
+import { ApiGet } from '../utils/ApiData.js';
+import { MaxCarousel, MinCarousel } from '../components';
 
 const Home = () => {
 
@@ -14,6 +14,7 @@ const Home = () => {
     const [items, setItems] = useState([]);
     const [categories, setCategories] = useState([]);
     const cart = [];
+    const merchantId = process.env.REACT_APP_MERCHANT;
     const navigate = useNavigate();
 
     const openCategory = (name) => {
@@ -25,22 +26,31 @@ const Home = () => {
     }
 
     const fetchCategories = async () => {
-        const {data} = await ApiGet("category/getcategories");
-        console.log("categories", data);
-        setCategories(data);
+        try {
+            const {data} = await ApiGet(`category/getCategories/${merchantId}`);
+            console.log("categories", data);
+            setCategories(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
+
     const fetchItems = async () => {
-        const {data} = await ApiGet("item/getItems?category=ALL");
-        console.log("items", data);
-        setItems(data);
+        try {
+            const {data} = await ApiGet("item/getItems?category=ALL");
+            console.log("items", data);
+            setItems(data);
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     useEffect(() => {
         fetchItems();
-        fetchCategories()
+        fetchCategories();
     }, [])
-    
+
     const addToCart = async (item) => {
         try {
 
@@ -58,13 +68,18 @@ const Home = () => {
             {
                 window.innerWidth > 1000
                     ?
-                    <img className='w-100' src='https://sastabazzars.in/wp-content/uploads/2022/09/1900_x_730_anmazing_factory_benner_03_web.jpg' />
+                    <img className='w-100 100vh' src='https://sastabazzars.in/wp-content/uploads/2022/09/1900_x_730_anmazing_factory_benner_03_web.jpg' />
                     :
                     <></>
             }
-
+            
+            {/* All Collections Carousel */}
+            <div style={{textAlign: 'center'}}>
+                <h4>All Collection</h4>
+            </div>
+            <MinCarousel categories={categories} />
             {/* Category */}
-            <div className='d-flex flex-column align-items-center'>
+            {/* <div className='d-flex flex-column align-items-center'>
                 <h2 className='my-4'>Shop By Category</h2>
                 <div className='d-flex w-100 justify-content-center flex-wrap'>
                     {
@@ -76,10 +91,10 @@ const Home = () => {
                         ))
                     }
                 </div>
-            </div>
+            </div> */}
 
             {/* Trending */}
-            <div className='d-flex flex-column align-items-center'>
+            {/* <div className='d-flex flex-column align-items-center'>
                 <h2 className='my-4'>Trending</h2>
                 <div className='d-flex w-100 justify-content-center flex-wrap'>
                     {
@@ -97,10 +112,10 @@ const Home = () => {
                         ))
                     }
                 </div>
-            </div>
+            </div> */}
 
             {/* New Arrivel */}
-            <div className='d-flex flex-column align-items-center'>
+            {/* <div className='d-flex flex-column align-items-center'>
                 <h2 className='my-4'>New Arrivals</h2>
                 <div className='d-flex w-100 justify-content-center flex-wrap'>
                     {
@@ -120,7 +135,7 @@ const Home = () => {
                         ))
                     }
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
