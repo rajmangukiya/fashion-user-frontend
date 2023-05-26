@@ -32,9 +32,9 @@ const MaxCarousel = ({categories}) => {
       // showDots={true}
       infinite={true}
       keyBoardControl={true}
-      autoPlaySpeed={1000}
-      transitionDuration={500}
-      customTransition="all .5"
+      // autoPlaySpeed={1000}
+      // transitionDuration={500}
+      // customTransition="all .5"
       // removeArrowOnDeviceType={["tablet", "mobile"]}
       containerClass="carousel-container"
       dotListClass="custom-dot-list-style"
