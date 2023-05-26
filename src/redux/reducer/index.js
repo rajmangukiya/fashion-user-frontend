@@ -1,5 +1,5 @@
-import cartSlice from './cartReducer'
-import userDataSlice from './authReducer'
+import cartSlice from './cartReducer.js'
+import userDataSlice from './authReducer.js'
 
 export {
     cartSlice,
