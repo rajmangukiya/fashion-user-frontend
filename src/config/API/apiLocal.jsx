@@ -1,7 +1,7 @@
 const protocol = 'http';
 const host = 'localhost';
 const port = '5000';
-const trailUrl = 'api/v1/user';
+const trailUrl = 'api/v1/consumer';
 
 const hostUrl = `${protocol}://${host}${port ? ':' + port : ''}/`;
 const endpoint = `${protocol}://${host}${(port ? ':' + port : '')}/${trailUrl}`;

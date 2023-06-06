@@ -5,6 +5,20 @@ import { useDispatch } from 'react-redux'
 import STORAGEKEY from '../config/storageKey.js'
 import AuthStorage from '../utils/AuthStorage';
 import { loginAction } from '../redux/reducer/authReducer';
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
+import Home from './Home';
+
+if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 const Login = () => {
 
@@ -31,23 +45,14 @@ const Login = () => {
 
   
   return (
-    <div className=''>
-      <div>
-        <div>LOGIN</div>
-        <div>
-          <label for='mobile'>Mobile Number</label>
-          <input id='mobile' type='text'></input>
-        </div>
-        <div>Get Otp</div>
-        <div>Or</div>
-        <div>
-          Sign in with Google
-        </div>
-      </div>
-      <div>
-        WELOCOME TO TRENDY STYLE
-      </div>
-    </div>
+    <ClerkProvider publishableKey={clerkPubKey}>
+      <SignedIn>
+        <Home />
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </ClerkProvider>
   )
 }
 
