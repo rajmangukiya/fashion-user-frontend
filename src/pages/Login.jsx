@@ -16,6 +16,7 @@ import {
 import Home from './Home';
 
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
+  console.log(process.env);
   throw new Error("Missing Publishable Key")
 }
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;

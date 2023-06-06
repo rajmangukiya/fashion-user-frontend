@@ -27,7 +27,8 @@ const Layout = ({ children, ...props }) => {
 
     return (
         <div>
-            {isLogged ?? <Header />}
+            {/* {isLogged ?? <Header />} */}
+            <Header/>
             <div className='pt-5' {...props}>{children}</div>
             <Footer />
         </div>
