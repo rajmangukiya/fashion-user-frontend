@@ -1,0 +1,30 @@
+/* Item Listing */
+
+.item-listing-tabs{
+  margin-top: 10px;
+}
+.nav{
+  --bs-nav-link-color: #A28E69;
+  --bs-nav-link-hover-color: #a2967f
+}
+.nav-pills{
+  padding: 2px;
+}
+.nav-pills > .nav-item{
+  /* color: #A28E69 */
+  border: 2px solid #A28E69;
+  margin: 2px;
+  border-radius: 0;
+}
+.nav-pills > .nav-item >.active{
+  background-color: #A28E69;
+}
+
+.item-listing-add-to-cart{
+  width: 100%;
+  border: 2px solid #A28E69;
+}
+.item-listing-add-to-cart:hover{
+  background-color: #A28E69;
+  color: white;
+}
