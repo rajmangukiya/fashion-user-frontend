@@ -5,7 +5,7 @@ import { Card, Button } from 'react-bootstrap';
 import { add } from '../redux/reducer/cartReducer';
 import STORAGEKEY from '../config/storageKey.js';
 import AuthStorage from '../utils/AuthStorage';
-import { ApiGet, ApiPostNoAuth } from '../utils/ApiData.js';
+import { ApiGet, ApiPost, ApiPostNoAuth } from '../utils/ApiData.js';
 import { MaxCarousel } from '../components';
 import { MinCarousel } from '../components';
 import { useAuth, useUser } from '@clerk/clerk-react';
@@ -32,7 +32,7 @@ const Home = () => {
 
     const fetchCategories = async () => {
         try {
-            const {data} = await ApiGet(`category/getCategories/${merchantId}`);
+            const {data} = await ApiPost('category/getCategories', { merchantId });
             console.log("categories", data);
             setCategories(data);
         } catch (error) {
@@ -43,7 +43,7 @@ const Home = () => {
 
     const fetchItems = async () => {
         try {
-            const {data} = await ApiGet("item/getItems?category=ALL");
+            const {data} = await ApiPost("item/getItems", { merchantId });
             console.log("items", data);
             setItems(data);
         } catch (error) {
@@ -74,8 +74,6 @@ const Home = () => {
                 merchantId
             });
             dispatch(loginAction(res?.data?.token))
-            fetchItems();
-            fetchCategories();
         } 
             catch (error) {
             console.log(error);
@@ -83,8 +81,9 @@ const Home = () => {
     }
 
     useEffect(() => {
-      handlePostSSOAuth()
-      console.log(ssoUserData);
+        ssoUserData.isLoaded && handlePostSSOAuth()
+        fetchItems();
+        fetchCategories();
     }, [])
     
     

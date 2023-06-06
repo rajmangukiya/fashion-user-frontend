@@ -21,7 +21,7 @@ export const userDataSlice = createSlice({
   initialState,
   reducers: {
     loginAction: (state, data) => {
-      AuthStorage.setStorageJsonData(STORAGEKEY.token, data.payload, true);
+      data.payload && AuthStorage.setStorageJsonData(STORAGEKEY.token, data.payload, true);
       state.isLogged = true
     },
     logoutAction: (state) => {
