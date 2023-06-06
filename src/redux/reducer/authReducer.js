@@ -5,6 +5,8 @@ import {
 } from "../types";
 import { createSlice } from '@reduxjs/toolkit'
 import { ApiGet } from "../../utils/ApiData";
+import STORAGEKEY from "../../config/storageKey";
+import AuthStorage from "../../utils/AuthStorage";
 
 const initialState = {
   userData: {
@@ -18,7 +20,8 @@ export const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
-    loginAction: (state) => {
+    loginAction: (state, data) => {
+      AuthStorage.setStorageJsonData(STORAGEKEY.token, data.payload, true);
       state.isLogged = true
     },
     logoutAction: (state) => {

@@ -5,9 +5,11 @@ import { Card, Button } from 'react-bootstrap';
 import { add } from '../redux/reducer/cartReducer';
 import STORAGEKEY from '../config/storageKey.js';
 import AuthStorage from '../utils/AuthStorage';
-import { ApiGet } from '../utils/ApiData.js';
+import { ApiGet, ApiPostNoAuth } from '../utils/ApiData.js';
 import { MaxCarousel } from '../components';
 import { MinCarousel } from '../components';
+import { useAuth, useUser } from '@clerk/clerk-react';
+import { loginAction } from '../redux/reducer/authReducer';
 
 const Home = () => {
 
@@ -17,6 +19,8 @@ const Home = () => {
     const cart = [];
     const merchantId = process.env.REACT_APP_MERCHANT;
     const navigate = useNavigate();
+    const ssoAuthData = useAuth();
+    const ssoUserData = useUser();
 
     const openCategory = (name) => {
         navigate(`/category/${name}`)
@@ -46,11 +50,6 @@ const Home = () => {
             console.log(error)
         }
     }
-    
-    useEffect(() => {
-        fetchItems();
-        fetchCategories();
-    }, [])
 
     const addToCart = async (item) => {
         try {
@@ -63,6 +62,31 @@ const Home = () => {
             console.log(error);
         }
     }
+
+    const handlePostSSOAuth = async () => {
+        try {
+            const res = await ApiPostNoAuth('auth/login', {
+                email: ssoUserData?.user?.primaryEmailAddress.emailAddress,
+                firstName: ssoUserData?.user?.firstName,
+                lastName: ssoUserData?.user?.lastName,
+                mobile: ssoUserData?.user?.phoneNumbers.map(number => number.phoneNumber),
+                avatar: ssoUserData?.user?.imageUrl,
+                merchantId
+            });
+            dispatch(loginAction(res?.data?.token))
+            fetchItems();
+            fetchCategories();
+        } 
+            catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+      handlePostSSOAuth()
+      console.log(ssoUserData);
+    }, [])
+    
     
     return (
         <div>
