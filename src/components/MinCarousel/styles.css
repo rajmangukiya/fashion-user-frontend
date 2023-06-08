@@ -1,42 +1,46 @@
-.collection-image {
+.min-carousel-container {
+    padding: 0 100px;
+}
+
+.min-carousel{
+    width: 100%;
+    height: 70vh;
+}
+
+.min-collection-image {
     width: 100%;
     height: 100%;   
     object-fit: cover;
 }
 
-.collection-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: end;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    opacity: 1;
-    padding-bottom: 20px;
+.min-collection-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
 }
 
-.collection-card-text-back {
+.min-collection-card-text-back {
     width: 100%;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
-    color: #000000;
+    color: #A28E69;
     background-color: #fff;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
-.collection-card-text {
+.min-collection-card-text {
     opacity: 1;
     margin-bottom: 0px;
 }
 
 
-.collection-card-button {
+.min-collection-card-button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #A28E69;
@@ -44,6 +48,14 @@
     text-decoration: none;
     border-radius: 4px;
     margin-top: 20px;
+}
+
+.min-collection-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    /* margin: 0 2%; */
 }
 
 @media only screen and (max-width: 2160px) and (min-width: 600px){
