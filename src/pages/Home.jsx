@@ -65,15 +65,19 @@ const Home = () => {
 
     const handlePostSSOAuth = async () => {
         try {
-            const res = await ApiPostNoAuth('auth/login', {
-                email: ssoUserData?.user?.primaryEmailAddress.emailAddress,
-                firstName: ssoUserData?.user?.firstName,
-                lastName: ssoUserData?.user?.lastName,
-                mobile: ssoUserData?.user?.phoneNumbers.map(number => number.phoneNumber),
-                avatar: ssoUserData?.user?.imageUrl,
-                merchantId
-            });
-            dispatch(loginAction(res?.data?.token))
+            if (ssoUserData?.user) {
+                const res = await ApiPostNoAuth('auth/login', {
+                    email: ssoUserData?.user?.primaryEmailAddress.emailAddress,
+                    firstName: ssoUserData?.user?.firstName,
+                    lastName: ssoUserData?.user?.lastName,
+                    mobile: ssoUserData?.user?.phoneNumbers.map(number => number.phoneNumber),
+                    avatar: ssoUserData?.user?.imageUrl,
+                    merchantId
+                });
+                dispatch(loginAction(res?.data?.token))
+                fetchItems();
+                fetchCategories();
+            }
         } 
             catch (error) {
             console.log(error);
@@ -81,10 +85,16 @@ const Home = () => {
     }
 
     useEffect(() => {
-        ssoUserData.isLoaded && handlePostSSOAuth()
-        fetchItems();
-        fetchCategories();
+        // handlePostSSOAuth()
+        // fetchItems();
+        // fetchCategories();
     }, [])
+
+    useEffect(() => {
+        handlePostSSOAuth()
+        console.log('ssoUserData.user2', ssoUserData?.user);
+    }, [ssoUserData?.user])
+    
     
     
     return (
