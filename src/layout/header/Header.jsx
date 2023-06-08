@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
@@ -13,7 +13,8 @@ import AuthStorage from '../../utils/AuthStorage';
 function BasicExample() {
 
   const navigate = useNavigate();
-  const cartItems = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
+  const { userData } = useSelector((state) => state.authInfo);
 
   const openHome = () => {
     navigate('/');
@@ -21,6 +22,13 @@ function BasicExample() {
 
   const showCart = () => {
     navigate('/cart')
+  }
+
+  const getCartValue = () => {
+    const userQuntity = userData?.cart?.reduce((acc, val) => {
+      return acc + val.quantity
+    }, 0) ?? 0
+    return userQuntity
   }
 
   return (
@@ -33,7 +41,7 @@ function BasicExample() {
                   <div>
                   <BsCart2 onClick={showCart} size={25}/>
                     <Badge style={{fontSize: '10px'}} bg="danger" className="start-10 translate-middle">
-                      {cartItems.length}
+                      {getCartValue()}
                     </Badge>
                   </div>
                     <BiUserCircle onClick={showCart} size={25} />

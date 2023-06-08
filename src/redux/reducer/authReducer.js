@@ -21,23 +21,58 @@ export const userDataSlice = createSlice({
   initialState,
   reducers: {
     loginAction: (state, data) => {
-      AuthStorage.setStorageJsonData(STORAGEKEY.token, data.payload, true);
+      data.payload && AuthStorage.setStorageJsonData(STORAGEKEY.token, data.payload, true);
       state.isLogged = true
     },
     logoutAction: (state) => {
       state.isLogged = false
     },
-    getUserData: (state) => {
-      ApiGet("user/GetUser")
-        .then((res) => {
-          state.userData = res
-          state.isLogged = true
+    setUserData: (state, action) => {
+      state.userData = action.payload
+    },
+    addToCart: (state, action) => {
+      let reduxItem = [{
+          item: action.payload,
+          quantity: 1
+      }]
+      state.userData = {
+        ...state.userData,
+        cart: [
+          ...(state.userData.cart.map(cartItem => {
+              if(cartItem?.item?._id == reduxItem[0]?.item?._id) {
+                  reduxItem = []
+                  return {
+                      item: cartItem.item,
+                      quantity: cartItem.quantity + 1
+                  }
+              }
+              return cartItem
+          })),
+          ...reduxItem
+        ]
+      }
+    },
+    decreaseFromCart: (state, action) => {
+      const itemId = action.payload
+      state.userData = {
+        ...state.userData,
+        cart: state.userData.cart.map(cartItem => {
+          if(cartItem.item._id == itemId && cartItem.quantity > 1) {
+            return {
+              ...cartItem,
+              quantity: cartItem.quantity - 1
+            }
+          }
+          return cartItem
         })
-        .catch((error) => {
-          state.userData = {}
-          state.userDataErr = error
-          state.isLogged = false
-        });
+      }
+    },
+    removeFromCart: (state, action) => {
+      const itemId = action.payload
+      state.userData = {
+        ...state.userData,
+        cart: state.userData.cart.filter(cartItem => cartItem.item._id != itemId)
+      }
     },
     removeUserData: (state) => {
       state.userData = {}
@@ -46,6 +81,6 @@ export const userDataSlice = createSlice({
   },
 })
 
-export const { loginAction, logoutAction, getUserData, removeUserData } = userDataSlice.actions
+export const { loginAction, logoutAction, setUserData, removeUserData, addToCart, decreaseFromCart, removeFromCart } = userDataSlice.actions
 
 export default userDataSlice.reducer

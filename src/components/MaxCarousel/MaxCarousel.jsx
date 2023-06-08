@@ -23,6 +23,7 @@ const MaxCarousel = ({categories}) => {
       items: 2
     }
   };
+
   return (
     <div className='max-carousel-container'>
       <Carousel responsive={responsive}
@@ -45,7 +46,7 @@ const MaxCarousel = ({categories}) => {
         categories.map(category => (
           
             <div key={category.id} className="max-collection-card">
-              <img className="max-collection-image" src={category.images[0]}/>
+              <img className="max-collection-image" src={category.image}/>
               <div className="max-collection-overlay">
                 <div className="max-collection-card-text-back">
                   <p className="max-collection-card-text">{category.name}</p>

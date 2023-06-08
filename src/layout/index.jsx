@@ -3,30 +3,40 @@ import Footer from './footer/Footer'
 import Header from './header/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { ApiGet } from '../utils/ApiData'
-import { loginAction, logoutAction } from '../redux/reducer/authReducer';
-import { useNavigate } from 'react-router-dom';
+import { loginAction, logoutAction, setUserData } from '../redux/reducer/authReducer';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { add } from '../redux/reducer/cartReducer'
 
 const Layout = ({ children, ...props }) => {
 
-    const dispatch = useDispatch();
+    const noAuth = ['/', '/category', '/item', '/collection']
+
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    
+    const location = useLocation()
     const isLogged = useSelector((state) => state.authInfo.isLogged);
 
-    useEffect(() => {
+    const authCheck = () => {
         ApiGet('auth')
         .then((res) => {
-            dispatch(loginAction())  
+            dispatch(loginAction())
+            dispatch(setUserData(res.data))
         })
         .catch((err) => {
             console.log(err);
-            // navigate('login')
-            dispatch(logoutAction())
+            if (!(noAuth.includes(location.pathname))) {
+                navigate('/sign-in')
+                dispatch(logoutAction())
+            }
         })
+    }
+
+    useEffect(() => {
+        authCheck()
     }, [])
 
     return (
-        <div>
+        <div className=''>
             {/* {isLogged ?? <Header />} */}
             <Header/>
             <div className='pt-5' {...props}>{children}</div>
