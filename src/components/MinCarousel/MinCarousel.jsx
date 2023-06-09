@@ -51,7 +51,7 @@ const MinCarousel = ({categories}) => {
       {
         categories.map(category => (
             <div key={category.id} onClick={openItem(category._id)} className="min-collection-card">
-              <img className="min-collection-image" src={category.images[0]}/>
+              <img className="min-collection-image" src={category.image}/>
               <div className="min-collection-overlay">
                 <div className="min-collection-card-text-back">
                   <p className="min-collection-card-text">{category.name} and {category._id}</p>

@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { remove } from '../redux/reducer/cartReducer'
-import { useEffect } from 'react';
-import { BiArrowBack } from 'react-icons/bi'
-import { addToCart, decreaseFromCart, removeFromCart } from '../redux/reducer/authReducer';
-import { ApiPost } from '../utils/ApiData';
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, decreaseFromCart, removeFromCart } from '../../redux/reducer/authReducer';
+import { ApiPost } from '../../utils/ApiData';
 
-const Cart = () => {
+const BagDetails = ({ setSelectedTab }) => {
+
     const { userData } = useSelector(state => state.authInfo);
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const increaseQuantity = (item) => async () => {
         try {
@@ -40,26 +35,7 @@ const Cart = () => {
         }
     }
 
-    useEffect(() => {
-      console.log('userData', userData.cart);
-    }, [userData])
-    
-
-  return (
-    <div className='w-100 p-5'>
-        <div className='w-100 d-flex'>
-            <BiArrowBack
-                onClick={() => navigate(-1)}
-                style={{color: '#A28E69', cursor: 'pointer'}}
-                className='fs-2' />
-            <div className='flex-grow-1 d-flex justify-content-center align-items-center'>
-                <div style={{color: '#A28E69'}} className='fs-5'>Bag</div>
-                <div style={{width: '10%'}} className='border-bottom border-2 mx-4'></div>
-                <div>Address</div>
-                <div style={{width: '10%'}} className='border-bottom border-2 mx-4'></div>
-                <div>Payment</div>
-            </div>
-        </div>
+    return (
         <div className='d-flex mt-5 align-items-start'>
             <div className='border border-1 w-75 p-5 me-3'>
                 {
@@ -120,13 +96,13 @@ const Cart = () => {
                     <div>₹ 4200.00</div>
                 </div>
                 <div 
-                    style={{backgroundColor: '#A28E69'}} 
+                    style={{backgroundColor: '#A28E69', cursor: 'pointer'}} 
                     className='text-white py-2 text-center mt-4'
+                    onClick={() => setSelectedTab('address')}
                 >Place Order</div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
-export default Cart
+export default BagDetails
