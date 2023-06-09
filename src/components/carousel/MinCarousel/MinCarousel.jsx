@@ -57,7 +57,7 @@ const MinCarousel = ({items}) => {
               <img className="min-collection-image" src={item.images[0]}/>
               {/* <div className="min-collection-overlay">
                 <div className="min-collection-card-text-back">
-                  <p className="min-collection-card-text">{category.name} and {category._id}</p>
+                  <p className="min-collection-card-text">{category.name}</p>
                 </div>
                 <button className='min-collection-card-button'>View Collection</button>
               </div> */}

@@ -41,11 +41,15 @@ function BasicExample() {
     navigate('/cart')
   }
 
+  const showCollection = () => {
+    navigate('/collection')
+  }
+
   const getCartValue = () => {
-    const userQuntity = userData?.cart?.reduce((acc, val) => {
+    const userQuantity = userData?.cart?.reduce((acc, val) => {
       return acc + val.quantity
     }, 0) ?? 0
-    return userQuntity
+    return userQuantity
   }
 
   return (
