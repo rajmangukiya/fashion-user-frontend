@@ -6,7 +6,7 @@ import { add } from '../redux/reducer/cartReducer';
 import STORAGEKEY from '../config/storageKey.js';
 import AuthStorage from '../utils/AuthStorage';
 import { ApiGet, ApiPost, ApiPostNoAuth } from '../utils/ApiData.js';
-import { MaxCarousel } from '../components';
+import { Banner, MaxCarousel } from '../components';
 import { MinCarousel } from '../components';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import { loginAction } from '../redux/reducer/authReducer';
