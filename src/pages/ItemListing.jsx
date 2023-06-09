@@ -65,6 +65,7 @@ const ItemListing = () => {
       className="mb-3 item-listing-tabs mt-5"
       variant='pills'
       justify
+      style={{ whiteSpace: "nowrap" }}
     >
       {
       categories.map(category => {
@@ -78,7 +79,7 @@ const ItemListing = () => {
                 if(item.category == category._id) {
                   return (
                     <Card className='m-2' style={{ width: '18rem' , border: "none"}}>
-                      <Card.Img variant="top" src={item.images[0]} alt={item.name} style={{ cursor:"pointer" }} onClick={() => {navigate(`/item/${item.id}`)}}/>
+                      <Card.Img variant="top" src={item.images[0]} alt={item.name} style={{ cursor:"pointer" }} onClick={() => {navigate(`/item/${item._id}`)}}/>
                       <Card.Body>
                         <Card.Title>{item.title}</Card.Title>
                         <Card.Text>{item.price} Rs.</Card.Text>
