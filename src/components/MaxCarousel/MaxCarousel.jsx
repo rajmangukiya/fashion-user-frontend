@@ -2,8 +2,10 @@ import React from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import '../MaxCarousel/styles.css'
+import { useNavigate } from 'react-router-dom';
 
 const MaxCarousel = ({categories}) => {
+  const navigate = useNavigate()
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -23,7 +25,6 @@ const MaxCarousel = ({categories}) => {
       items: 2
     }
   };
-
   return (
     <div className='max-carousel-container'>
       <Carousel responsive={responsive}
@@ -38,13 +39,13 @@ const MaxCarousel = ({categories}) => {
       >
       {
         categories.map(category => (
-            <div key={category.id} className="max-collection-card">
+            <div key={category._id} className="max-collection-card">
               <img className="max-collection-image" src={category.image}/>
               <div className="max-collection-overlay">
                 <div className="max-collection-card-text-back">
                   <p className="max-collection-card-text">{category.name}</p>
                 </div>
-                <button className='max-collection-card-button'>View Collection</button>
+                <button onClick={() =>  navigate(`/collection?id=${category._id}`)} className='max-collection-card-button'>View Collection</button>
               </div>
             </div>
           

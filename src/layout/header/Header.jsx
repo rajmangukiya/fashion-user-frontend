@@ -19,7 +19,9 @@ function BasicExample() {
   const openHome = () => {
     navigate('/');
   }
-
+  const openCollection = () => {
+    navigate('/collection');
+  }
   const showCart = () => {
     navigate('/cart')
   }
@@ -60,7 +62,7 @@ function BasicExample() {
               <NavDropdown.Item href="/">New Arrival</NavDropdown.Item>
               <NavDropdown.Item href="/">Best Selling</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link onClick={openHome} className='mx-3'>Collections</Nav.Link>
+            <Nav.Link onClick={openCollection} className='mx-3'>Collections</Nav.Link>
             <Nav.Link onClick={openHome} className='mx-3'>Contact</Nav.Link>
             </Nav>
         </Navbar.Collapse>         
