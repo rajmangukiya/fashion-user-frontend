@@ -75,8 +75,6 @@ const Home = () => {
                     merchantId
                 });
                 dispatch(loginAction(res?.data?.token))
-                fetchItems();
-                fetchCategories();
             }
         } 
             catch (error) {
@@ -85,9 +83,8 @@ const Home = () => {
     }
 
     useEffect(() => {
-        // handlePostSSOAuth()
-        // fetchItems();
-        // fetchCategories();
+        fetchItems();
+        fetchCategories();
     }, [])
 
     useEffect(() => {
