@@ -52,6 +52,12 @@ export const userDataSlice = createSlice({
         ]
       }
     },
+    clearCart: (state) => {
+      state.userData = {
+        ...state.userData,
+        cart: []
+      }
+    },
     decreaseFromCart: (state, action) => {
       const itemId = action.payload
       state.userData = {
@@ -81,6 +87,6 @@ export const userDataSlice = createSlice({
   },
 })
 
-export const { loginAction, logoutAction, setUserData, removeUserData, addToCart, decreaseFromCart, removeFromCart } = userDataSlice.actions
+export const { loginAction, logoutAction, setUserData, removeUserData, addToCart, decreaseFromCart, removeFromCart, clearCart } = userDataSlice.actions
 
 export default userDataSlice.reducer

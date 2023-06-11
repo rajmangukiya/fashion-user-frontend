@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, decreaseFromCart, removeFromCart } from '../../redux/reducer/authReducer';
 import { ApiPost } from '../../utils/ApiData';
 
-const BagDetails = ({ setSelectedTab }) => {
+const BagDetails = ({ setSelectedTab, userData, getPriceDetails }) => {
 
-    const { userData } = useSelector(state => state.authInfo);
     const dispatch = useDispatch()
 
     const increaseQuantity = (item) => async () => {
@@ -39,8 +38,8 @@ const BagDetails = ({ setSelectedTab }) => {
         <div className='d-flex mt-5 align-items-start'>
             <div className='border border-1 w-75 p-5 me-3'>
                 {
-                    userData.cart?.map((cartItem, index) => <>
-                        <div key={index} className='d-flex'>
+                    userData?.cart?.map((cartItem, index) => <div key={index}>
+                        <div className='d-flex'>
                             <img style={{width: '200px', height: '280px', objectFit: 'cover'}} className='me-5' src={cartItem?.item?.images?.length ? cartItem?.item?.images[0] : ''} />
                             <div className='d-flex flex-column align-items-start'>
                                 <div className='fs-3 fw-normal'>{cartItem?.item.title}</div>
@@ -73,27 +72,27 @@ const BagDetails = ({ setSelectedTab }) => {
                             </div>
                         </div>
                         <div className='border-bottom border-1 my-5'></div>
-                    </>)
+                    </div>)
                 }
             </div>
             <div className='border border-1 flex-grow-1 p-5'>
                 <div className='fs-5 mb-4'>Price Details</div>
                 <div className='d-flex justify-content-between mb-1'>
                     <div>Total MRP</div>
-                    <div>₹ 4000.00</div>
+                    <div>₹ {getPriceDetails().totalMrp}</div>
                 </div>
                 <div className='d-flex justify-content-between mb-1'>
                     <div>GST</div>
-                    <div>₹ 100.00</div>
+                    <div>₹ {getPriceDetails().gst}</div>
                 </div>
                 <div className='d-flex justify-content-between mb-1'>
                     <div>Shipping Charges</div>
-                    <div>₹ 100.00</div>
+                    <div>₹ {getPriceDetails().shippingCharges}</div>
                 </div>
                 <div className='border-bottom border-1 my-3'></div>
                 <div className='d-flex justify-content-between'>
                     <div>Total Amount</div>
-                    <div>₹ 4200.00</div>
+                    <div>₹ {getPriceDetails().totalAmount}</div>
                 </div>
                 <div 
                     style={{backgroundColor: '#A28E69', cursor: 'pointer'}} 
