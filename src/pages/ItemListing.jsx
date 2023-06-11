@@ -87,7 +87,6 @@ const ItemListing = () => {
               <Row className='justify-content-center'>
               { 
               items.map(item => {
-                // console.log(item.category, );
                 if(item.category == category._id) {
                   return (
                     <Card className='m-2' style={{ width: '18rem' , border: "none"}}>

@@ -2,19 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { ApiPost } from '../../utils/ApiData';
 
-const AddressDetails = ({ setSelectedTab }) => {
-
-    const { userData } = useSelector(state => state.authInfo);
-    const [addressDetails, setAddressDetails] = useState({
-        firstName: userData?.addressDetails?.first_name ?? userData?.first_name ?? '',
-        lastName: userData?.addressDetails?.lastName ?? userData?.last_name ?? '',
-        company: userData?.addressDetails?.company ?? '',
-        address: userData?.addressDetails?.address ?? '',
-        landmark: userData?.addressDetails?.landmark ?? '',
-        state: userData?.addressDetails?.state ?? '',
-        country: userData?.addressDetails?.country ?? '',
-        pincode: userData?.addressDetails?.pincode ?? ''
-    })
+const AddressDetails = ({ userData, setSelectedTab, addressDetails, setAddressDetails, getPriceDetails }) => {
 
     const addressDetailsHandler = (value) => {
         setAddressDetails(prev => ({
@@ -23,15 +11,6 @@ const AddressDetails = ({ setSelectedTab }) => {
         }))
     }
 
-    const makePayment = async () => {
-        try {
-            console.log('resss');
-            const res = await ApiPost("payment/ccAvenue");
-            console.log('res', res);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
   return (
     <div className='d-flex mt-5 align-items-start justify-content-center'>
@@ -51,6 +30,18 @@ const AddressDetails = ({ setSelectedTab }) => {
                         className='border border-1 p-3 rounded-1 flex-grow-1'
                     />
                 </div>
+                <input 
+                    value={addressDetails.email}
+                    onChange={(e) => addressDetailsHandler({email: e.target.value})}
+                    placeholder='Email address'
+                    className='border border-1 p-3 rounded-1 w-100 mb-3'
+                />
+                <input 
+                    value={addressDetails.mobile}
+                    onChange={(e) => addressDetailsHandler({mobile: e.target.value})}
+                    placeholder='Mobile number'
+                    className='border border-1 p-3 rounded-1 w-100 mb-3'
+                />
                 <input 
                     value={addressDetails.company}
                     onChange={(e) => addressDetailsHandler({company: e.target.value})}
@@ -98,29 +89,29 @@ const AddressDetails = ({ setSelectedTab }) => {
                     />
                 </div>
             </div>
-            <div className='border border-1 p-5 w-25'>
-                <div className='fs-5 mb-4'>Price Details</div>
+            <div style={{width: '30%'}} className='border border-1 p-5'>
+            <div className='fs-5 mb-4'>Price Details</div>
                 <div className='d-flex justify-content-between mb-1'>
                     <div>Total MRP</div>
-                    <div>₹ 4000.00</div>
+                    <div>₹ {getPriceDetails().totalMrp}</div>
                 </div>
                 <div className='d-flex justify-content-between mb-1'>
                     <div>GST</div>
-                    <div>₹ 100.00</div>
+                    <div>₹ {getPriceDetails().gst}</div>
                 </div>
                 <div className='d-flex justify-content-between mb-1'>
                     <div>Shipping Charges</div>
-                    <div>₹ 100.00</div>
+                    <div>₹ {getPriceDetails().shippingCharges}</div>
                 </div>
                 <div className='border-bottom border-1 my-3'></div>
                 <div className='d-flex justify-content-between'>
                     <div>Total Amount</div>
-                    <div>₹ 4200.00</div>
+                    <div>₹ {getPriceDetails().totalAmount}</div>
                 </div>
                 <div 
                     style={{backgroundColor: '#A28E69', cursor: 'pointer'}} 
                     className='text-white py-2 text-center mt-4'
-                    onClick={makePayment}
+                    onClick={() => setSelectedTab('payment')}
                 >Continue to Shipping</div>
             </div>
         </div>

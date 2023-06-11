@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { remove } from '../../redux/reducer/cartReducer'
-import { useEffect } from 'react';
 import { BiArrowBack } from 'react-icons/bi'
-import { addToCart, decreaseFromCart, removeFromCart } from '../../redux/reducer/authReducer';
-import { ApiPost } from '../../utils/ApiData';
 import { useNavigate } from 'react-router-dom';
 import BagDetails from './BagDetails';
 import AddressDetails from './AddressDetails';
@@ -16,24 +11,47 @@ const Cart = () => {
     const [selectedTab, setSelectedTab] = useState('bag')
 
     const { userData } = useSelector(state => state.authInfo);
-    const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [addressDetails, setAddressDetails] = useState({
+        firstName: userData?.addressDetails?.first_name ?? userData?.first_name ?? '',
+        lastName: userData?.addressDetails?.lastName ?? userData?.last_name ?? '',
+        email: userData?.addressDetails?.email ?? userData?.email ?? '',
+        mobile: userData?.addressDetails?.mobile ?? userData?.mobile ?? '',
+        company: userData?.addressDetails?.company ?? '',
+        address: userData?.addressDetails?.address ?? '',
+        landmark: userData?.addressDetails?.landmark ?? '',
+        state: userData?.addressDetails?.state ?? '',
+        country: userData?.addressDetails?.country ?? '',
+        pincode: userData?.addressDetails?.pincode ?? ''
+    })
+
+    const getPriceDetails = () => {
+        const priceDetails = {}
+        priceDetails['totalMrp'] = Math.ceil(
+            userData?.cart?.map(cartItem => cartItem.item.discountedPrice * cartItem.quantity)?.reduce((acc, value) => acc + value, 0)
+        )
+        priceDetails['gst'] = Math.ceil(priceDetails.totalMrp * 0.18)
+        priceDetails['shippingCharges'] = Math.ceil(100)
+        priceDetails['totalAmount'] = Math.ceil(priceDetails.totalMrp + priceDetails.gst + priceDetails.shippingCharges)
+
+        return priceDetails
+    }
 
     const RenderElement = () => {
         switch (selectedTab) {
-            case 'bag': return <BagDetails setSelectedTab={setSelectedTab} />
-            case 'address': return <AddressDetails setSelectedTab={setSelectedTab} />
-            case 'payment': return <PaymentDetails setSelectedTab={setSelectedTab} />
+            case 'bag': return <BagDetails userData={userData} setSelectedTab={setSelectedTab} getPriceDetails={getPriceDetails} />
+            case 'address': return <AddressDetails userData={userData} addressDetails={addressDetails} setAddressDetails={setAddressDetails} setSelectedTab={setSelectedTab} getPriceDetails={getPriceDetails} />
+            case 'payment': return <PaymentDetails userData={userData}  addressDetails={addressDetails} getPriceDetails={getPriceDetails} />
             default: return <div>Something's wrong</div>
         }
     }
 
-    useEffect(() => {
-      console.log('userData', userData.cart);
-    }, [userData])
-    
+    // useEffect(() => {
+    //   console.log('userData', userData);
+    // }, [userData])
 
-  return (
+    return (
     <div className='w-100 p-5'>
         <div className='w-100 d-flex'>
             <BiArrowBack
@@ -60,9 +78,7 @@ const Cart = () => {
                 >Payment</div>
             </div>
         </div>
-        {
-            <RenderElement />
-        }
+        {RenderElement()}
     </div>
   )
 }
