@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import '../MinCarousel/styles.css';
 
 const MinCarousel = ({categories}) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate;
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -56,7 +56,7 @@ const MinCarousel = ({categories}) => {
                 <div className="min-collection-card-text-back">
                   <p className="min-collection-card-text">{category.name} and {category._id}</p>
                 </div>
-                <button onClick={() =>  navigate(`/collection?id=${category._id}`)} className='min-collection-card-button'>View Collection</button>
+                <button className='min-collection-card-button'>View Collection</button>
               </div>
             </div>
         ))
