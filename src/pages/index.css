@@ -18,6 +18,7 @@
 }
 .nav-pills > .nav-item >.active{
   background-color: #A28E69;
+  border-radius: 0;
 }
 
 .item-listing-add-to-cart{
@@ -27,4 +28,17 @@
 .item-listing-add-to-cart:hover{
   background-color: #A28E69;
   color: white;
+}
+
+/* Item  */
+.review-card{
+  width: 60vw; 
+  border-radius:0 ;
+  padding: 1vw ;
+  margin-bottom: 8px;
+}
+@media only screen and (max-width: 992px) {
+  .review-card{
+    width: 85vw;
+  }
 }
