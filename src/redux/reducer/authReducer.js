@@ -38,7 +38,7 @@ export const userDataSlice = createSlice({
       state.userData = {
         ...state.userData,
         cart: [
-          ...(state.userData.cart.map(cartItem => {
+          ...(state.userData?.cart?.map(cartItem => {
               if(cartItem?.item?._id == reduxItem[0]?.item?._id) {
                   reduxItem = []
                   return {

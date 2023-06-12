@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ApiPost } from '../../utils/ApiData';
 import {load} from '@cashfreepayments/cashfree-js';
 import { useDispatch } from 'react-redux';
@@ -13,10 +13,13 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
     const createOrder = () => {
         try {
             const orderData = {
-                itemDetails: userData.cart.map(cartItem => ({
-                    itemId: cartItem.item._id,
-                    quantity: cartItem.quantity
-                })),
+                itemDetails: userData.cart.map(cartItem => {
+                    console.log(cartItem.item._id);
+                    return ({
+                        itemId: cartItem?.item?._id,
+                        quantity: cartItem?.quantity
+                    })
+                }),
                 merchantId,
                 amount: getPriceDetails().totalAmount,
                 instruction: 'no instruction',
@@ -67,6 +70,11 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
             console.log(error);
         } 
     }
+    
+    useEffect(() => {
+      console.log('userData', userData);
+    }, [userData])
+    
 
     return (
         <div className='w-100 d-flex justify-content-center mt-5 pt-5'>
