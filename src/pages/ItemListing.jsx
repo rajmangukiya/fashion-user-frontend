@@ -1,7 +1,7 @@
 import { Button, Card, Container, Row } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ApiPost } from '../utils/ApiData';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -74,7 +74,7 @@ const ItemListing = () => {
       activeKey={activeTab}
       onSelect={handleTabSelect}
       id="justify-tab-example"
-      className="mb-3 item-listing-tabs mt-5"
+      className="mb-3 item-listing-tabs mt-3"
       variant='pills'
       justify
       style={{ whiteSpace: "nowrap" }}
@@ -90,7 +90,7 @@ const ItemListing = () => {
                 if(item.category == category._id) {
                   return (
                     <Card className='m-2' style={{ width: '18rem' , border: "none"}}>
-                      <Card.Img variant="top" src={item.images[0]} alt={item.name} style={{ cursor:"pointer" }} onClick={() => navigate(`/item/${item._id}`)}/>
+                      <Card.Img variant="top" src={item.images[0]} alt={item.name} style={{ cursor:"pointer",width: "100%",height: "100%",objectFit: "cover"}} onClick={() => navigate(`/item/${item._id}`,{state: {item, categoryName: category.name}})}/>
                       <Card.Body>
                         <Card.Title>{item.title}</Card.Title>
                         <Card.Text>{item.price} Rs.</Card.Text>
@@ -108,6 +108,7 @@ const ItemListing = () => {
       })
       }
     </Tabs>
+
   );
 }
 

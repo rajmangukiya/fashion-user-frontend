@@ -37,8 +37,8 @@ const Layout = ({ children, ...props }) => {
 
     return (
         <div className=''>
-            {/* {isLogged ?? <Header />} */}
-            <Header/>
+            {location.pathname != "/sign-in" && <Header />}
+            {/* <Header/> */}
             <div className='pt-5' {...props}>{children}</div>
             <Footer />
         </div>

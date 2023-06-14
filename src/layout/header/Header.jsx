@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {BsCart2 } from 'react-icons/bs'
 import { BiUserCircle } from "react-icons/bi"
-import {Badge} from 'react-bootstrap';
+import {Badge, Dropdown} from 'react-bootstrap';
 import AuthStorage from '../../utils/AuthStorage';
 
 function BasicExample() {
@@ -15,6 +15,21 @@ function BasicExample() {
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
   const { userData } = useSelector((state) => state.authInfo);
+  const isLogged = useSelector((state) => state.authInfo.isLogged);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const openHome = () => {
     navigate('/');
@@ -35,22 +50,31 @@ function BasicExample() {
 
   return (
     <>
-    <Navbar fixed='top' className='shadow-sm' bg="light" expand="lg">
-      <Container>
+    <Navbar fixed='top' className='shadow-sm' bg="white" expand="lg" >
+      <Container >
         <Navbar.Brand style={{cursor: 'pointer'}} onClick={openHome} className='me-5 '>Fashion</Navbar.Brand>
-        <Nav className='order-lg-last'>
-                <div style={{ display:"flex" }}>
-                  <div>
-                  <BsCart2 onClick={showCart} size={25}/>
-                    <Badge style={{fontSize: '10px'}} bg="danger" className="start-10 translate-middle">
-                      {getCartValue()}
-                    </Badge>
-                  </div>
-                    <BiUserCircle onClick={showCart} size={25} />
-                </div>
-          </Nav>
-        <Navbar.Toggle aria-controls="basic-navbar-nav " />
-        <Navbar.Collapse id="basic-navbar-nav ">
+        <div className='order-lg-last' style={{ display:"flex" }}>
+          <div>
+          <BsCart2 onClick={showCart} size={25}/>
+            <Badge style={{fontSize: '10px'}} bg="danger" className="start-10 translate-middle">
+              {getCartValue()}
+            </Badge>
+          </div>
+          { windowWidth > 992 &&
+            <NavDropdown  title={<BiUserCircle size={25}/>} id="basic-nav-dropdown">
+              <NavDropdown.Item href="/">User</NavDropdown.Item>
+              <NavDropdown.Item href="/">Orders</NavDropdown.Item>
+              {
+                isLogged ? 
+                <NavDropdown.Item href="/">Sign Out</NavDropdown.Item>
+                :
+                <NavDropdown.Item href="/sign-in">Sign In</NavDropdown.Item>
+              }
+            </NavDropdown>
+          }
+        </div>
+        <Navbar.Toggle aria-controls="basic-navbar-nav "  />
+        <Navbar.Collapse id="basic-navbar-nav " >
           <Nav className="me-auto">
             <NavDropdown className='mx-3' title="Shop" id="basic-nav-dropdown">
               <NavDropdown.Header className='fw-bold'>Shop By Type</NavDropdown.Header>
@@ -64,6 +88,14 @@ function BasicExample() {
             </NavDropdown>
             <Nav.Link onClick={openCollection} className='mx-3'>Collections</Nav.Link>
             <Nav.Link onClick={openHome} className='mx-3'>Contact</Nav.Link>
+            {windowWidth < 992 &&
+              <NavDropdown className='mx-3' title={<BiUserCircle size={25}/>} id="basic-nav-dropdown">
+                <NavDropdown.Item href="/">User</NavDropdown.Item>
+                <NavDropdown.Item href="/">Orders</NavDropdown.Item>
+                <NavDropdown.Item href="/">Sign In</NavDropdown.Item>
+                <NavDropdown.Item href="/">Sign Out</NavDropdown.Item>
+            </NavDropdown>
+            }
             </Nav>
         </Navbar.Collapse>         
       </Container>
