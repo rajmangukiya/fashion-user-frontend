@@ -72,44 +72,6 @@ const ItemListing = () => {
   
 
   return (
-    // <Tabs
-    //   activeKey={activeTab}
-    //   onSelect={handleTabSelect}
-    //   id="justify-tab-example"
-    //   className="mb-3 item-listing-tabs mt-5 pt-5 mb-5"
-    //   variant='pills'
-    //   justify
-    //   style={{ whiteSpace: "nowrap" }}
-    // >
-    //   {
-    //   categories.map(category => {
-    //     return (
-    //       <Tab eventKey={category._id} title={category.name}>
-    //         <Container fluid >
-    //           <Row className='justify-content-center'>
-              // { 
-              // items.map(item => {
-              //   if(item.category == category._id) {
-              //     return (
-              //       <Card className='m-2' style={{ width: '18rem' , border: "none"}}>
-              //         <Card.Img variant="top" src={item.images[0]} alt={item.name} style={{ cursor:"pointer",width: "100%",height: "100%",objectFit: "cover"}} onClick={() => navigate(`/item/${item._id}`,{state: {item, categoryName: category.name}})}/>
-              //         <Card.Body>
-              //           <Card.Title>{item.title}</Card.Title>
-              //           <Card.Text>{item.price} Rs.</Card.Text>
-              //           <Button variant="outline" onClick={addToCartHandler(item)} className='item-listing-add-to-cart'>Add To Cart</Button>
-              //         </Card.Body>
-              //       </Card>
-              //     )
-              //   }
-              // })
-            // }
-    //         </Row>
-    //         </Container>
-    //       </Tab>
-    //       )
-    //   })
-    //   }
-    // </Tabs>
     <div className='mt-5 p-5 d-flex flex-column flex-grow-1'>
       <div className='d-flex mb-3'>
         {
