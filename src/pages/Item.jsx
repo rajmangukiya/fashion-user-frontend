@@ -57,8 +57,8 @@ const Item = () => {
 
     const buyNow = async  () => {
         try {
-            await loadScript('https://checkout.razorpay.com/v1/checkout.js')
-            const { data } = await ApiPostNoAuth('payment/createRazorpayOrder', {amount: 500})
+            await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+            const { data } = await ApiPostNoAuth('payment/createRazorpayOrder', {amount: 500});
             const options = {
                 "key": 'rzp_test_oolCMq6FN4WSTv',
                 "amount": "50000",
