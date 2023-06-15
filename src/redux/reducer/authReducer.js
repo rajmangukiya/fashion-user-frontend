@@ -32,18 +32,19 @@ export const userDataSlice = createSlice({
     },
     addToCart: (state, action) => {
       let reduxItem = [{
-          item: action.payload,
-          quantity: 1
+          item: action.payload.item,
+          quantity: action.payload.itemCount
       }]
       state.userData = {
         ...state.userData,
         cart: [
           ...(state.userData?.cart?.map(cartItem => {
               if(cartItem?.item?._id == reduxItem[0]?.item?._id) {
-                  reduxItem = []
+                  reduxItem = [];
+                  console.log("payload", action.payload.itemCount)
                   return {
                       item: cartItem.item,
-                      quantity: cartItem.quantity + 1
+                      quantity: cartItem.quantity + action.payload.itemCount
                   }
               }
               return cartItem
@@ -87,6 +88,6 @@ export const userDataSlice = createSlice({
   },
 })
 
-export const { loginAction, logoutAction, setUserData, removeUserData, addToCart, decreaseFromCart, removeFromCart, clearCart } = userDataSlice.actions
+export const { loginAction, logoutAction, setUserData, removeUserData, addToCart, decreaseFromCart, removeFromCart, clearCart } = userDataSlice.actions;
 
 export default userDataSlice.reducer

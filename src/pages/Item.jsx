@@ -1,26 +1,38 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { addToCart, decreaseFromCart } from '../redux/reducer/authReducer'
 import { Carousel } from 'react-responsive-carousel';
-import { ApiGetNoAuth, ApiPostNoAuth } from '../utils/ApiData.js'
+import { ApiGetNoAuth, ApiPostNoAuth, ApiPost } from '../utils/ApiData.js'
 import { useParams } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import { RatingStar } from '../components/index.jsx';
 
 const Item = () => {
+    const { userData } = useSelector(state => state.authInfo);
     const [item, setItem] = useState({});
     const [itemCount, setItemCount] = useState(0);
-    const params = useParams()
+    const dispatch = useDispatch();
+    const params = useParams();
+    const itemId = params.itemId;
+    console.log("ID::::::", params.itemId);
+    console.log("userDATA::::::", userData)
 
     const decreaseCount = () => {
-        setItemCount(prev => prev == 0 ? 0 : prev - 1);
+            setItemCount(prev => prev === 0 ? 0 : prev - 1);
     }
 
     const increaseCount = () => {
-        setItemCount(prev => prev + 1);
+            setItemCount(prev => prev + 1);
     }
 
-    const addToCart = (item, itemCount) => {
-        
+    const addItemToCart = (item, itemCount) => async() => {
+        try {
+            dispatch(addToCart({item, itemCount}));
+            await ApiPost("item/addToCart", { itemId: item._id, quantity: itemCount });
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const reviews = [
@@ -92,9 +104,9 @@ const Item = () => {
     }
 
     const fetchItem = async () => {
-        const { data } = await ApiGetNoAuth(`item/getItem/${params.itemId}`)
+        const { data } = await ApiGetNoAuth(`item/getItem/${itemId}`)
         setItem(data)
-        console.log(data);
+        console.log("parttem::::::", data);
     }
 
     useEffect(() => {
@@ -131,7 +143,7 @@ const Item = () => {
                             <div className='fs-4'>{itemCount}</div>
                             <button onClick={increaseCount} className='px-4 fs-3'>+</button>
                         </div>
-                        <button onClick={() => addToCart(item, itemCount)} className='px-4 fs-5 bg-dark text-light ms-3'>Add To Cart</button>
+                        <button onClick={addItemToCart(item, itemCount)} className='px-4 fs-5 bg-dark text-light ms-3'>Add To Cart</button>
                     </div>
                     <button onClick={buyNow} className='px-4 py-2 mt-3 fs-5 bg-dark text-light'>Buy Now</button>
                     <div className='my-3'>{item?.description}</div>
