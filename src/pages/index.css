@@ -30,6 +30,15 @@
   color: white;
 }
 
+.non-selected-tab {
+
+}
+
+.selected-tab {
+  background-color: #A28E69;
+  color: white;
+}
+
 /* Item  */
 .review-card{
   width: 60vw; 

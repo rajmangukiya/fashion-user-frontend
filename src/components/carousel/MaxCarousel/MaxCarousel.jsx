@@ -28,6 +28,11 @@ const MaxCarousel = ({categories}) => {
       items: 2
     }
   };
+
+  const navigateToCollection = (categoryId) => () => {
+    navigate(`/collection`, {state: {categoryId}})
+  }
+
   return (
     <div id='category-carousel' className='max-carousel-container'>
       <Carousel responsive={responsive}
@@ -44,7 +49,7 @@ const MaxCarousel = ({categories}) => {
       >
       {
         categories.map(category => (
-            <div key={category._id} onClick={() =>  navigate(`/collection?id=${category._id}`)} style={{cursor: 'pointer'}} className="max-collection-card d-flex flex-column">
+            <div key={category._id} onClick={navigateToCollection(category._id)} style={{cursor: 'pointer'}} className="max-collection-card d-flex flex-column">
               <img className="max-collection-image" src={category.image}/>
               {/* <div className="max-collection-overlay">
                 <div className="max-collection-card-text-back">

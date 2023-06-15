@@ -36,11 +36,11 @@ const Layout = ({ children, ...props }) => {
     }, [])
 
     return (
-        <div className=''>
+        <div className='min-vh-100 d-flex flex-column'>
             {location.pathname != "/sign-in" && <Header />}
             {/* <Header/> */}
-            <div className='' {...props}>{children}</div>
-            <Footer />
+            <div className='flex-grow-1' {...props}>{children}</div>
+            <Footer/>
         </div>
     )
 };

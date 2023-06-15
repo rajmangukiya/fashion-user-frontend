@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import './footer.css'
 const Footer = () => {
   return (
-    <Container fluid style={{ backgroundColor: "#A28E69", maxWidth: "100%", color: "white", padding: "35px" }}>
+    <Container fluid style={{ backgroundColor: "#A28E69", maxWidth: "100%", color: "white", padding: "35px", marginBottom: 'auto' }}>
       <Row>
         <Col xs={4}>
           <h5>About Us</h5>
