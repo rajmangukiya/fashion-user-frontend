@@ -5,7 +5,7 @@
   padding: 0px;
   list-style: none !important;
   scroll-behavior: smooth;
-  transition: all 0.1s;
+  transition: all 0s !important;
   border: none;
   background: none;
   transition-duration: 500ms;
