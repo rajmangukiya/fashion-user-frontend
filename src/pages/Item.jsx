@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { ApiPost, ApiPostNoAuth } from '../utils/ApiData.js'
-import { useLocation } from 'react-router-dom';
+import { ApiGetNoAuth, ApiPostNoAuth } from '../utils/ApiData.js'
+import { useParams } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import { RatingStar } from '../components/index.jsx';
 
 const Item = () => {
-    const location = useLocation()
-    const itemDetails = location.state;
+    const [item, setItem] = useState({});
     const [itemCount, setItemCount] = useState(0);
+    const params = useParams()
 
     const decreaseCount = () => {
         setItemCount(prev => prev == 0 ? 0 : prev - 1);
@@ -22,6 +22,7 @@ const Item = () => {
     const addToCart = (item, itemCount) => {
         
     }
+
     const reviews = [
         {
             user : "Smit Bhalani",
@@ -39,6 +40,7 @@ const Item = () => {
             rating : 3.5
         }
     ]
+
     const loadScript = (src) => {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script')
@@ -89,13 +91,24 @@ const Item = () => {
         }
     }
 
+    const fetchItem = async () => {
+        const { data } = await ApiGetNoAuth(`item/getItem/${params.itemId}`)
+        setItem(data)
+        console.log(data);
+    }
+
+    useEffect(() => {
+      fetchItem()
+    }, [])
+    
+
     return (
-        <div className='d-flex flex-column align-items-center'>
+        <div className='d-flex flex-column align-items-center mt-5'>
             <div className='gallery-container pt-5'>
                 <div className='gallery'>
                     <Carousel>
                         {
-                            itemDetails.item.images.map(image => (
+                            item?.images?.map(image => (
                                 <div>
                                     <img src={image} />
                                 </div>
@@ -104,13 +117,13 @@ const Item = () => {
                     </Carousel>
                 </div>
                 <div className='d-flex flex-column'>
-                    <p>{itemDetails.categoryName}</p>
-                    <h3>{itemDetails.item.title}</h3>
+                    <p>{item?.categoryName}</p>
+                    <h3>{item?.title}</h3>
                     <div className='d-flex mt-0 mb-3 align-items-center'>
                         <p className='text-muted me-3 fs-5'>
-                            <del>{itemDetails.item.price}₹</del>
+                            <del>{item?.price}₹</del>
                         </p>
-                        <p className='fs-5 text-danger fs-3'>{itemDetails.item.discountedPrice}₹</p>
+                        <p className='fs-5 text-danger fs-3'>{item?.discountedPrice}₹</p>
                     </div>
                     <div className='d-flex'>
                         <div className='d-flex align-items-center border border-2 align-self-baseline'>
@@ -118,10 +131,10 @@ const Item = () => {
                             <div className='fs-4'>{itemCount}</div>
                             <button onClick={increaseCount} className='px-4 fs-3'>+</button>
                         </div>
-                        <button onClick={() => addToCart(itemDetails.item, itemCount)} className='px-4 fs-5 bg-dark text-light ms-3'>Add To Cart</button>
+                        <button onClick={() => addToCart(item, itemCount)} className='px-4 fs-5 bg-dark text-light ms-3'>Add To Cart</button>
                     </div>
                     <button onClick={buyNow} className='px-4 py-2 mt-3 fs-5 bg-dark text-light'>Buy Now</button>
-                    <div className='my-3'>{itemDetails.item.description}</div>
+                    <div className='my-3'>{item?.description}</div>
                 </div>
             </div>
             <div className='align-items-center d-flex flex-column'>

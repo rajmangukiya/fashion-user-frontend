@@ -39,7 +39,7 @@ const Layout = ({ children, ...props }) => {
         <div className=''>
             {location.pathname != "/sign-in" && <Header />}
             {/* <Header/> */}
-            <div className='pt-5' {...props}>{children}</div>
+            <div className='' {...props}>{children}</div>
             <Footer />
         </div>
     )

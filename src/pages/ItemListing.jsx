@@ -74,7 +74,7 @@ const ItemListing = () => {
       activeKey={activeTab}
       onSelect={handleTabSelect}
       id="justify-tab-example"
-      className="mb-3 item-listing-tabs mt-3"
+      className="mb-3 item-listing-tabs mt-5 pt-5 mb-5"
       variant='pills'
       justify
       style={{ whiteSpace: "nowrap" }}

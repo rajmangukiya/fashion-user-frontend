@@ -50,7 +50,7 @@ function BasicExample() {
 
   return (
     <>
-    <Navbar fixed='top' className='shadow-sm' bg="white" expand="lg" >
+    <Navbar fixed='top' className='border-bottom border-1' color='white' bg="white" expand="lg" >
       <Container >
         <Navbar.Brand style={{cursor: 'pointer'}} onClick={openHome} className='me-5 '>Fashion</Navbar.Brand>
         <div className='order-lg-last' style={{ display:"flex" }}>

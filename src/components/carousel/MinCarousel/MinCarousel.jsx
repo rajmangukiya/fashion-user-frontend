@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import '../MinCarousel/styles.css';
+import { CustomLeftArrow, CustomRightArrow } from '../Components';
 
-const MinCarousel = ({categories}) => {
-  const navigate = useNavigate;
+const MinCarousel = ({items}) => {
+  const navigate = useNavigate();
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -31,7 +32,7 @@ const MinCarousel = ({categories}) => {
   }
 
   return (
-    <div className='min-carousel-container'>
+    <div className='min-carousel-container mb-5'>
       <Carousel responsive={responsive}
       swipeable={true}
       draggable={true}
@@ -39,25 +40,29 @@ const MinCarousel = ({categories}) => {
       // showDots={true}
       infinite={true}
       keyBoardControl={true}
-      autoPlaySpeed={1000}
-      transitionDuration={500}
-      customTransition="all .5"
+      // autoPlaySpeed={1000}
+      // transitionDuration={500}
+      // customTransition="all .5"
       // removeArrowOnDeviceType={["tablet", "mobile"]}
       containerClass="carousel-container"
       dotListClass="custom-dot-list-style"
       // itemClass="carousel-item-padding-100-px"
       className='min-carousel'
+      customLeftArrow={<CustomLeftArrow size='45px' />}
+      customRightArrow={<CustomRightArrow size='45px' />}
       >
       {
-        categories.map(category => (
-            <div key={category.id} onClick={openItem(category._id)} className="min-collection-card">
-              <img className="min-collection-image" src={category.image}/>
-              <div className="min-collection-overlay">
+        items.map((item, index) => (
+            <div key={index} style={{cursor: 'pointer'}} onClick={openItem(item._id)} className="min-collection-card d-flex flex-column">
+              <img className="min-collection-image" src={item.images[0]}/>
+              {/* <div className="min-collection-overlay">
                 <div className="min-collection-card-text-back">
                   <p className="min-collection-card-text">{category.name} and {category._id}</p>
                 </div>
                 <button className='min-collection-card-button'>View Collection</button>
-              </div>
+              </div> */}
+              <div className='text-center mt-2 text-black'>{item.title}</div>
+              <div className='text-center opacity-75 text-black'>₹{item.discountedPrice}.00</div>
             </div>
         ))
       }

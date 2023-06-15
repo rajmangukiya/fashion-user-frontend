@@ -33,7 +33,6 @@ const Home = () => {
     const fetchCategories = async () => {
         try {
             const {data} = await ApiPostNoAuth('category/getCategories', { merchantId });
-            console.log("categories", data);
             setCategories(data);
         } catch (error) {
             console.log(error);
@@ -44,7 +43,6 @@ const Home = () => {
     const fetchItems = async () => {
         try {
             const {data} = await ApiPostNoAuth("item/getItems", { merchantId });
-            console.log("items", data);
             setItems(data);
         } catch (error) {
             console.log(error)
@@ -91,7 +89,9 @@ const Home = () => {
         handlePostSSOAuth()
     }, [ssoUserData?.user])
     
-    
+    useEffect(() => {
+        console.log('items', items);
+    }, [items])
     
     return (
         <div>
@@ -107,22 +107,16 @@ const Home = () => {
             <MaxCarousel categories={categories} />
 
             {/* New Arrivals Section */}
-            <div style={{textAlign: 'center'}}>
+            <div style={{textAlign: 'center'}} className='mb-4'>
                 <h4>New Arrivals</h4>
             </div>  
-            <MinCarousel categories={categories}/>
+            <MinCarousel items={items}/>
 
             {/* Best Selling Section */}
-            <div style={{textAlign: 'center'}}>
+            <div style={{textAlign: 'center'}} className='pt-5 mb-4'>
                 <h4>Best Selling</h4>
             </div>  
-            <MinCarousel categories={categories}/>
-            <form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"  >
-                <input type="text" name="access_code" id="access_code" value="AVYE76KF47AV91EYVA" style={{display:'none'}} />
-                <input type="text" id="encRequest" name="encRequest" value="f38202448dc76c8aa880ee85b025e8a310695299988d20076647111a2f92b55e726655cd717c52096f9a261d5d9ec9d91d7c83b6463e419a2cb9c96e10cb68f7a2d8ec9380da097fd6453b2815cc82adf38c2766b6518e585465586ed4bf0aa91f04dc731b3b3078da3b745bc1279a2263f1cc91936ba0e54d65b52fa91753c3fdda143832449988789c41bec01e91a3" style={{display:'none'}} />
-                <input type='submit' name='submit' value='pay now' />
-                {/* <script language="javascript">{document.redirect.submit()}</script> */}
-            </form>
+            <MinCarousel items={items}/>
         </div>
     )
 }

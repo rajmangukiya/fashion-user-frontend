@@ -15,10 +15,22 @@
     outline: none;
 }
 
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+    color: unset !important;
+}
+
 .item-container {
     width: 150px;
     margin: 0px 10px 10px 10px;
     cursor: pointer;
+}
+
+.navbar-nav .nav-item a, .nav-link {
+  color: rgb(0, 0, 0) !important;
 }
 
 // ********* item page ************

@@ -36,7 +36,6 @@ export const ApiGet = (type) => {
 export const ApiGetNoAuth = (type) => {
     const s = type.includes('?') ? '&' : '?';
     return new Promise((resolve, reject) => {
-        console.log(BaseURL);
         axios.get(`${BaseURL}${type}`, getHttpOptions({ ...defaultHeaders, isAuth: false }))
             .then((responseJson) => {
                 resolve(responseJson.data);
