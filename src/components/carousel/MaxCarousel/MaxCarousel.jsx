@@ -16,16 +16,16 @@ const MaxCarousel = ({categories}) => {
       items: 5
     },              
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 800 },
       items: 3
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3
+      breakpoint: { max: 800, min: 400 },
+      items: 2
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2
+      breakpoint: { max: 400, min: 0 },
+      items: 1
     }
   };
 
@@ -41,23 +41,17 @@ const MaxCarousel = ({categories}) => {
       ssr={true} // means to render carousel on server-side.
       infinite={true}
       keyBoardControl={true}
-      containerClass="carousel-container"
-      dotListClass="custom-dot-list-style"
-      className='max-carousel'
-      customLeftArrow={<CustomLeftArrow size='60px' />}
-      customRightArrow={<CustomRightArrow size='60px' />}
+      containerClass="max-carousel-sub-container"
+      // dotListClass="custom-dot-list-style"
+      className='w-100'
+      customLeftArrow={<CustomLeftArrow size='50px' className='max-carousel-left-arrow'/>}
+      customRightArrow={<CustomRightArrow size='50px' className='max-carousel-right-arrow'/>}
       >
       {
         categories.map(category => (
-            <div key={category._id} onClick={navigateToCollection(category._id)} style={{cursor: 'pointer'}} className="max-collection-card d-flex flex-column">
-              <img className="max-collection-image" src={category.image}/>
-              {/* <div className="max-collection-overlay">
-                <div className="max-collection-card-text-back">
-                  <p className="max-collection-card-text">{category.name}</p>
-                </div>
-                <button onClick={() =>  navigate(`/collection?id=${category._id}`)} className='max-collection-card-button'>View Collection</button>
-              </div> */}
-              <div className='text-center mt-2 fs-5'>{category.name}</div>
+            <div key={category._id} onClick={navigateToCollection(category._id)} style={{cursor: 'pointer'}} className="carousel-card w-100 px-2 d-flex flex-column">
+              <img className="w-100 flex-grow-1" src={category.image}/>
+              <div className='text-center mt-2'>{category.name}</div>
               <div className='text-center opacity-75'>Up to 60% off</div>
             </div>
           

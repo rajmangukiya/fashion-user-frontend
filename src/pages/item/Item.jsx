@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { addToCart, decreaseFromCart } from '../redux/reducer/authReducer'
+import { addToCart, decreaseFromCart } from '../../redux/reducer/authReducer'
 import { Carousel } from 'react-responsive-carousel';
-import { ApiGetNoAuth, ApiPostNoAuth, ApiPost } from '../utils/ApiData.js'
+import { ApiGetNoAuth, ApiPostNoAuth, ApiPost } from '../../utils/ApiData.js'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import { RatingStar } from '../components/index.jsx';
-import Gallery from '../components/gallery/Gallery';
+import { RatingStar } from '../../components/index.jsx';
+import Gallery from '../../components/gallery/Gallery';
+import GalleryCarousel from '../../components/carousel/galleryCarousel/GalleryCarousel'
 
 const Item = () => {
     const { userData } = useSelector(state => state.authInfo);
@@ -122,11 +123,19 @@ const Item = () => {
       fetchItem()
       checkIsItemInCart()
     }, [])
-    
+
+    useEffect(() => {
+        console.log('item1', item);
+    }, [item])
 
     return (
-        <div className='d-flex flex-column align-items-center mt-5 pt-4 pb-5'>
+        <div className='d-flex flex-column align-items-center mt-5 pt-4 p-5'>
             <div className='d-flex pt-5 justify-content-center'>
+                {/* {
+                    window.innerWidth > 1024
+                    ? <Gallery item={item} />
+                    : <GalleryCarousel item={item} />
+                } */}
                 <Gallery item={item} />
                 <div className='d-flex flex-column w-25'>
                     <p>{item?.categoryName}</p>

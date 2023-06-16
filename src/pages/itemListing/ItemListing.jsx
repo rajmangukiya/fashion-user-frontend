@@ -2,10 +2,11 @@ import { Button, Card, Container, Row } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ApiPost } from '../utils/ApiData';
+import { ApiPost } from '../../utils/ApiData';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../redux/reducer/authReducer';
+import { addToCart } from '../../redux/reducer/authReducer';
+import './styles.css'
 
 const ItemListing = () => {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ const ItemListing = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  const [activeCategory, setActiveCategory] = useState(location.state.categoryId);
+  const [activeCategory, setActiveCategory] = useState(location?.state?.categoryId ?? '');
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -25,6 +26,9 @@ const ItemListing = () => {
     try {
         const {data} = await ApiPost('category/getCategories', { merchantId });
         setCategories(data);
+        if (activeCategory == '') {
+          setActiveCategory(data[0]._id)
+        }
     } catch (error) {
         console.log(error);
     }
@@ -72,30 +76,29 @@ const ItemListing = () => {
   
 
   return (
-    <div className='mt-5 p-5 d-flex flex-column flex-grow-1'>
-      <div className='d-flex mb-3'>
+    <div className='item-list-container mt-5 pt-5 d-flex flex-column flex-grow-1'>
+      <div className='d-flex w-100 flex-wrap justify-content-center'>
         {
           categories.map((category, index) => (
             <div 
               key={index} 
               onClick={handleTabChange(category?._id)} 
-              style={{cursor: 'pointer'}} 
-              className={`${category._id == activeCategory ? 'selected-tab' : 'border border-1'} px-5 py-2 mx-2`}
+              className={`${category._id == activeCategory ? 'selected-tab' : 'border border-1'} category-tab`}
             >
               {category.name}
             </div>
           ))
         }
       </div>
-      <div className='d-flex h-100 p-5 w-100 justify-content-between flex-wrap'>
+      <div className='d-flex h-100 w-100 flex-wrap justify-content-center p-4'>
           {
             filteredItems?.length
             ?
             filteredItems
               ?.map((item, index) => {
                 return (
-                  <div key={index} style={{cursor: 'pointer'}} onClick={openItem(item._id)} className="d-flex flex-column align-items-center my-4">
-                    <img style={{width: '300px', height: '400px', objectFit: 'cover'}} className="" src={item.images[0]}/>
+                  <div key={index} onClick={openItem(item._id)} className="item-list-card d-flex flex-column align-items-center my-4">
+                    <img className="" src={item.images[0]}/>
                     <div className='mt-2 text-black'>{item.title}</div>
                     <div className='opacity-75'>₹{item.discountedPrice}.00</div>
                   </div>

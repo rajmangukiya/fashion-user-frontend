@@ -46,8 +46,3 @@
   padding: 1vw ;
   margin-bottom: 8px;
 }
-@media only screen and (max-width: 992px) {
-  .review-card{
-    width: 85vw;
-  }
-}
