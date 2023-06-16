@@ -1,9 +1,9 @@
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Category from '../pages/Category'
-import Item from '../pages/Item'
+import Item from './item/Item'
 import Cart from './cart/Cart'
-import ItemListing from './ItemListing'
+import ItemListing from './itemListing/ItemListing'
 import './index.css'
 export {
     Home,

@@ -1,19 +1,12 @@
-.banner {
-  height: 100vh;
-}
 
 /* Large devices (laptops/desktops, 1200px and down) */
 @media only screen and (max-width: 1200px) {
-  .banner {
-    height: 50vw;
-  }
+  
 }
 
 /* Medium devices (landscape tablets, 992px and down) */
 @media only screen and (max-width: 992px) {
-  .banner ~ a {
-    display: none;
-  }
+  
 }
 
 /* Small devices (portrait tablets and large phones, 768px and down) */
@@ -21,7 +14,7 @@
   
 }
 
-/* Extra small devices (phones, 600px and down) */
+/* Too Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   
 }

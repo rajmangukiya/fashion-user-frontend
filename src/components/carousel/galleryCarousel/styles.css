@@ -1,18 +1,18 @@
 .min-carousel-container {
-    padding: 0 50px;
+  padding: 0 50px;
 }
 
 .min-carousel-left-arrow {
-    left: 15px;
-    top: 38%;
-    transform: scale(0.8);
-  }
+  left: 15px;
+  top: 38%;
+  transform: scale(0.8);
+}
   
-  .min-carousel-right-arrow {
-    right: 15px;
-    top: 38%;
-    transform: scale(0.8);
-  }
+.min-carousel-right-arrow {
+  right: 15px;
+  top: 38%;
+  transform: scale(0.8);
+}
 
 /* Large devices (laptops/desktops, 1200px and down) */
 @media only screen and (max-width: 1200px) {

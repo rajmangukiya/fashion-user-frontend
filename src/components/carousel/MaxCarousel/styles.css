@@ -1,93 +1,133 @@
 .max-carousel-container {
   padding: 0 100px;
+  margin: 100px 0;
 }
 
-.max-carousel{
-  width: 100%;
-  height: 100vh;
+.max-carousel-left-arrow {
+  left: 20px;
+  top: 40%;
 }
 
-.max-collection-image {
-  width: 100%;
-  /* height: 100%;    */
-  flex-grow: 1;
-  object-fit: cover;
-}
-
-.max-collection-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 20px;
-}
-
-.max-collection-card-text-back {
-  width: 100%;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #A28E69;
-  background-color: #fff;
-  opacity: 0.8;
-}
-
-.max-collection-card-text {
-  opacity: 1;
-  margin-bottom: 0px;
-}
-
-
-.max-collection-card-button {
-  padding: 10px 20px;
-  background-color: #A28E69;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-top: 20px;
-}
-
-.max-collection-card {
-    position: relative;
-    width: 100%;
-    height: 90%;
-    padding: 10px;
-    /* margin: 0 2%; */
-  }
-
-.carousel-left-arrow {
-  position: absolute;
-    outline: 0;
-    transition: all .5s;
-    border-radius: 35px;
-    z-index: 1000;
-    border: 0;
-    background: rgba(0,0,0,0.5);
-    min-width: 43px;
-    min-height: 43px;
-    opacity: 1;
+.max-carousel-right-arrow {
+  right: 20px;
+  top: 40%;
 }
 
 .react-multiple-carousel__arrow::before {
   color: black;
 }
 
-@media only screen and (max-width: 600px) {
-  .max-carousel-container{
-      margin: 10px 10px;
+.carousel-card > img {
+  object-fit: cover;
+}
+
+.carousel-card > div {
+  font-size: 1rem;
+}
+
+/* Large devices (laptops/desktops, 1200px and down) */
+@media only screen and (max-width: 1200px) {
+  .max-carousel-container {
+    padding: 0 50px;
+    margin: 70px 0;
   }
-  .max-collection-card-button {
-      padding: 10px 10px;
+  
+  .max-carousel-left-arrow {
+    left: 15px;
+    top: 38%;
+    transform: scale(0.8);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 15px;
+    top: 38%;
+    transform: scale(0.8);
+  }
+}
+
+/* Medium devices (landscape tablets, 992px and down) */
+@media only screen and (max-width: 992px) {
+  .max-carousel-container {
+    padding: 0 30px;
+  }
+  
+  .max-carousel-left-arrow {
+    left: 10px;
+    top: 36%;
+    transform: scale(0.7);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 10px;
+    top: 36%;
+    transform: scale(0.7);
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+  .max-carousel-container {
+    padding: 0 20px;
+    margin: 50px 0;
+  }
+  
+  .max-carousel-left-arrow {
+    left: 5px;
+    top: 32%;
+    transform: scale(0.6);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 5px;
+    top: 32%;
+    transform: scale(0.6);
   }
 
-  .max-collection-card {
-      position: relative;
-      display: inline-block;
-      width: 150px;
-      height: 300px;
-      margin: 15px 0px;
+  .carousel-card > div {
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .max-carousel-container {
+    padding: 0 10px;
+    margin: 50px 0;
+  }
+  
+  .max-carousel-left-arrow {
+    left: 10px;
+    top: 36%;
+    transform: scale(0.7);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 10px;
+    top: 36%;
+    transform: scale(0.7);
+  }
+
+  .carousel-card > div {
+    font-size: 0.8rem;
+  }
+}
+
+/* Too Extra small devices (phones, 450px and down) */
+@media only screen and (max-width: 400px) {
+  .max-carousel-container {
+    padding: 0 10px;
+    margin: 50px 0;
+  }
+  
+  .max-carousel-left-arrow {
+    left: 15px;
+    top: 40%;
+    transform: scale(0.8);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 15px;
+    top: 40%;
+    transform: scale(0.8);
   }
 }
