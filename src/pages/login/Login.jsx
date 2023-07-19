@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { ApiDelete, ApiGet, ApiGetNoAuth, ApiPatch, ApiPost, ApiPostNoAuth } from '../../utils/ApiData';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import STORAGEKEY from '../../config/storageKey.js'
 import AuthStorage from '../../utils/AuthStorage';
 import { loginAction } from '../../redux/reducer/authReducer';
@@ -10,6 +10,8 @@ import { BiArrowBack } from 'react-icons/bi';
 import './styles.css'
 
 const Login = () => {
+
+  const isLogged = useSelector((state) => state.authInfo.isLogged);
 
   const [form, setForm] = useState({
     mobile: '',
@@ -42,6 +44,13 @@ const Login = () => {
   const loginUser  = () => {
 
   }
+
+  useEffect(() => {
+    if(isLogged) {
+      navigate('/')
+    }
+  }, [isLogged])
+  
   
   return (
     <div className='d-flex flex-column align-items-center vh-100'>

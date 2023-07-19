@@ -1,15 +1,15 @@
-import Home from '../pages/Home'
+import Home from './Home'
 import Login from './login/Login'
-import Category from '../pages/Category'
 import Item from './item/Item'
 import Cart from './cart/Cart'
 import ItemListing from './itemListing/ItemListing'
+import Error from './Error'
 import './index.css'
 export {
     Home,
     Login,
-    Category,
     Item,
     Cart,
-    ItemListing
+    ItemListing,
+    Error
 }
