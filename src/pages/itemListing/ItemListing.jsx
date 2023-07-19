@@ -20,7 +20,6 @@ const ItemListing = () => {
   const [categories, setCategories] = useState([]);
   const merchantId = process.env.REACT_APP_MERCHANT;
   const { isLogged } = useSelector((state) => state.authInfo);
-  const cartData = useSelector((state) => state.cart);
 
   const fetchCategories = async () => {
     try {
@@ -29,17 +28,18 @@ const ItemListing = () => {
         if (activeCategory == '') {
           setActiveCategory(data[0]._id)
         }
+        fetchItems(data[0]._id)
     } catch (error) {
         console.log(error);
     }
   }
 
-  const fetchItems = async () => {
+  const fetchItems = async (activeCategoryId) => {
     try {
         const {data} = await ApiPost("item/getItems", { merchantId });
-        console.log("items", data);
+        console.log("activeCategoryId", activeCategoryId);
         setItems(data);
-        setFilteredItems(data.filter(item => item.category == activeCategory))
+        setFilteredItems(data.filter(item => item.category == (activeCategory == '' ? activeCategoryId : activeCategory)))
     } catch (error) {
         console.log(error)
     }
@@ -70,13 +70,12 @@ const ItemListing = () => {
 
   useEffect(() => {
     fetchCategories()
-    fetchItems()
   }, [])
   
   
 
   return (
-    <div className='item-list-container mt-5 pt-5 d-flex flex-column flex-grow-1'>
+    <div className='item-list-container mt-5 d-flex flex-column flex-grow-1'>
       <div className='d-flex w-100 flex-wrap justify-content-center'>
         {
           categories.map((category, index) => (
@@ -97,10 +96,10 @@ const ItemListing = () => {
             filteredItems
               ?.map((item, index) => {
                 return (
-                  <div key={index} onClick={openItem(item._id)} className="item-list-card d-flex flex-column align-items-center my-4">
+                  <div key={index} onClick={openItem(item?._id)} className="item-list-card d-flex flex-column align-items-center my-4">
                     <img className="" src={item.images[0]}/>
-                    <div className='mt-2 text-black'>{item.title}</div>
-                    <div className='opacity-75'>₹{item.discountedPrice}.00</div>
+                    <div className='mt-2 text-black'>{item?.title}</div>
+                    <div className='opacity-75'>₹{item?.discountedPrice}.00</div>
                   </div>
                 )
             })

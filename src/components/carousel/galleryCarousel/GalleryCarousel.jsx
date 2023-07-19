@@ -33,11 +33,11 @@ const GalleryCarousel = ({ item }) => {
   }
 
   useEffect(() => {
-    console.log('item1', item);
+    console.log('item111', item);
   }, [item])
   
   return (
-    <div className='min-carousel-container my-4'>
+    <div className='min-carousel-container my-4 w-50'>
       <Carousel responsive={responsive}
       swipeable={true}
       draggable={true}
@@ -57,13 +57,15 @@ const GalleryCarousel = ({ item }) => {
       customRightArrow={<CustomRightArrow size='45px' className='min-carousel-right-arrow' />}
       >
       {
-        item?.images?.map((item, index) => (
-            <div key={index} style={{cursor: 'pointer'}} onClick={openItem(item._id)} className="carousel-card w-100 px-2 d-flex flex-column">
-              {/* <img className="w-100 flex-grow-1" src={item.images[0]}/>
-              <div className='text-center mt-2 text-black'>{item.title}</div>
-              <div className='text-center opacity-75 text-black'>₹{item.discountedPrice}.00</div> */}
+        item?.images?.map((image, index) => {
+          return (
+            <div key={index} style={{cursor: 'pointer'}} onClick={openItem(item._id)} className="bg-dark w-100 h-100 px-2 d-flex flex-column">
+              <img className="w-100 h-100 flex-grow-1" src={image}/>
+              <div className='text-center mt-2 text-black'>{'item.title'}</div>
+              <div className='text-center opacity-75 text-black'>₹{'item.discountedPrice'}.00</div>
             </div>
-        ))
+        )
+        }) ?? []
       }
       </Carousel>
     </div>

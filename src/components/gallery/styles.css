@@ -1,0 +1,117 @@
+.item-gallery-container {
+  height: 700px;
+}
+
+.gallery-selected-image {
+  width: 500px;
+  object-fit: cover;
+}
+
+.gallery-list-image-container > img {
+  height: 140px;
+  width: 100px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.gallery-list-image-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Large devices (laptops/desktops, 1200px and down) */
+@media only screen and (max-width: 1200px) {
+  .item-gallery-container {
+    height: 518px;
+    margin-right: 35px;
+  }
+  
+  .gallery-selected-image {
+    width: 370px;
+  }
+
+  .gallery-list-image-container > img {
+    height: 105px;
+    width: 75px;
+  }
+}
+
+/* Medium devices (landscape tablets, 992px and down) */
+@media only screen and (max-width: 992px) {
+  .item-gallery-container {
+    height: 700px;
+    margin-right: 0px !important;
+  }
+  
+  .gallery-selected-image {
+    width: 500px;
+  }
+
+  .gallery-list-image-container > img {
+    height: 140px;
+    width: 100px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+  .item-gallery-container {
+    height: 560px;
+  }
+  
+  .gallery-selected-image {
+    width: 400px;
+  }
+
+  .gallery-list-image-container > img {
+    height: 98px;
+    width: 70px;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .item-gallery-container {
+    height: unset;
+    width: 90%;
+    flex-direction: column;
+  }
+  
+  .gallery-selected-image {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .gallery-list-image-container {
+    width: 100%;
+    flex-direction: row !important;
+  }
+
+  .gallery-list-image-container > img {
+    height: 112px;
+    width: 80px;
+    margin-right: 10px;
+  }
+}
+
+/* Too Extra small devices (phones, 450px and down) */
+@media only screen and (max-width: 400px) {
+  .item-gallery-container {
+    flex-direction: column;
+  }
+  
+  .gallery-selected-image {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .gallery-list-image-container {
+    width: 100%;
+    flex-direction: row !important;
+  }
+
+  .gallery-list-image-container > img {
+    height: 84px;
+    width: 60px;
+    margin-right: 10px;
+  }
+}

@@ -1,3 +1,7 @@
+.item-list-container {
+  padding: 100px 0;
+}
+
 .category-tab {
   padding: 7px 30px;
   margin: 5px;
@@ -19,6 +23,11 @@
 
 .item-list-card > div {
   font-size: 1rem;
+}
+
+.selected-tab {
+  background-color: #F4EDE3;
+  color: white;
 }
 
 /* Large devices (laptops/desktops, 1200px and down) */

@@ -55,9 +55,9 @@ const MinCarousel = ({items}) => {
       {
         items.map((item, index) => (
             <div key={index} style={{cursor: 'pointer'}} onClick={openItem(item._id)} className="carousel-card w-100 px-2 d-flex flex-column">
-              <img className="w-100 flex-grow-1" src={item.images[0]}/>
-              <div className='text-center mt-2 text-black'>{item.title}</div>
-              <div className='text-center opacity-75 text-black'>₹{item.discountedPrice}.00</div>
+              <img className="w-100 flex-grow-1" src={item?.images[0]}/>
+              <div className='text-center mt-2 text-black'>{item?.title}</div>
+              <div className='text-center opacity-75 text-black'>₹{item?.discountedPrice}.00</div>
             </div>
         ))
       }

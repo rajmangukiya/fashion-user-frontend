@@ -3,52 +3,42 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import './footer.css'
 const Footer = () => {
   return (
-    <Container fluid style={{ backgroundColor: "#A28E69", maxWidth: "100%", color: "white", padding: "35px", marginBottom: 'auto' }}>
-      <Row>
-        <Col xs={4}>
-          <h5>About Us</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis possimus blanditiis molestias dolores accusantium facilis sequi nemo,</p>
-        </Col>
-        <Col className='footer-col'>
-          <h5>Info</h5>
-          <div>
-            <a href='/'>Search</a>
-          </div>
-          <div>
-            <a href='/'>About Us</a>
-          </div>
-        </Col>
-        <Col className='footer-col'>
-          <h5>Explore</h5>
-          <div>
-            <a href='/'>shop</a>
-          </div>
-          <div>
-            <a href='/'> Collection</a>
-          </div>
-          <div>
-            <a href='/'>Contact</a>
-          </div>
-        </Col>
-        <Col className='footer-col'>
-          <h5>Quick Links</h5>
-          <div>
-            <a href='/'>New Arrival</a>
-          </div>
-          <div>
-            <a href='/'>Saree</a>
-          </div>
-          <div>
-            <a href='/'>Dresses</a>
-          </div>
-        </Col>
-        <Col>
-          <h5 className=''>Contact Us</h5>
-          <Form.Control className='' width={7} size="sm" type="email" placeholder="Email Address" />
-          <Button className='my-2' variant="light">Join</Button>
-        </Col>
-      </Row>
-    </Container>)
+    <div className='footer-container'>
+      <div className='d-flex flex-column align-items-center mb-5'>
+        <div className='footer-name fw-bold'>The Brand</div>
+        <div className='footer-name'>About the brand</div>
+        <div className='footer-name'>art-i-culate</div>
+        <div className='footer-name'>Evenes</div>
+        <div className='footer-name'>Journal</div>
+        <div className='footer-name'>Stores</div>
+        <div className='footer-name'>Press</div>
+        <div className='footer-name'>Careers</div>
+        <div className='footer-name'>T&C</div>
+        <div className='footer-name'>Privacy policy</div>
+      </div>
+      <div className='d-flex flex-column align-items-center mb-5'>
+        <div className='footer-name fw-bold'>Support</div>
+        <div className='footer-name'>My Account</div>
+        <div className='footer-name'>FAQs</div>
+        <div className='footer-name'>Shipping & payments</div>
+        <div className='footer-name'>Returns & exchanges</div>
+        <div className='footer-name'>Track your order</div>
+        <div className='footer-name'>Contact us</div>
+      </div>
+      <div className='d-flex flex-column align-items-center mb-5'>
+        <div className='footer-name fw-bold'>Social</div>
+        <div className='footer-name'>Instagram</div>
+        <div className='footer-name'>Facebook</div>
+        <div className='footer-name'>YouTube</div>
+        <div className='footer-name'>LinkedIn</div>
+      </div>
+      <div>
+        {/* <div className='footer-name fs-5'>A window to our world. */}
+{/* Do sign up.</div> */}
+        <input className='border-bottom border-1 border-dark py-1 w-100' placeholder='Email' />
+      </div>
+    </div>
+  )
 }
 
 export default Footer

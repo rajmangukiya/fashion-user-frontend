@@ -6,6 +6,8 @@ import { ApiGet } from '../utils/ApiData'
 import { loginAction, logoutAction, setUserData } from '../redux/reducer/authReducer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { add } from '../redux/reducer/cartReducer'
+import AuthStorage from '../utils/AuthStorage'
+import STORAGEKEY from '../config/storageKey'
 
 const Layout = ({ children, ...props }) => {
 
@@ -14,24 +16,28 @@ const Layout = ({ children, ...props }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
-    const isLogged = useSelector((state) => state.authInfo.isLogged);
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryToken = urlParams.get('token');
 
     const authCheck = () => {
         ApiGet('auth')
         .then((res) => {
-            dispatch(loginAction())
             dispatch(setUserData(res.data))
         })
         .catch((err) => {
             console.log(err);
             if (!(noAuth.includes(location.pathname))) {
-                navigate('/sign-in')
                 dispatch(logoutAction())
+                navigate('/sign-in')
             }
         })
     }
 
     useEffect(() => {
+        if (queryToken && queryToken != '' && queryToken != null) { 
+            AuthStorage.setStorageJsonData(STORAGEKEY.token, queryToken, true)
+            navigate('/')
+        }
         authCheck()
     }, [])
 

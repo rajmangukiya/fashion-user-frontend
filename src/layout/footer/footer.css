@@ -1,4 +1,99 @@
-.footer-col div a{
-  text-decoration: none;
-  color: white;
+.footer-container {
+  background-color: #F4EDE3;
+  display: flex;
+  justify-content: space-between;
+  padding: 100px 150px;
+}
+
+.footer-name {
+  font-family: 'Ysabeau Office', sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  margin: 5px 0;
+}
+
+/* Large devices (laptops/desktops, 1200px and down) */
+@media only screen and (max-width: 1200px) {
+  .footer-container {
+    padding: 100px 50px;
+  }
+}
+
+/* Medium devices (landscape tablets, 992px and down) */
+@media only screen and (max-width: 992px) {
+  .footer-container {
+    display: block;
+  }
+
+  .footer-name {
+    text-align: center;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+  .max-carousel-container {
+    padding: 0 20px;
+    margin: 50px 0;
+  }
+  
+  .max-carousel-left-arrow {
+    left: 5px;
+    top: 32%;
+    transform: scale(0.6);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 5px;
+    top: 32%;
+    transform: scale(0.6);
+  }
+
+  .carousel-card > div {
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .max-carousel-container {
+    padding: 0 10px;
+    margin: 50px 0;
+  }
+  
+  .max-carousel-left-arrow {
+    left: 10px;
+    top: 36%;
+    transform: scale(0.7);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 10px;
+    top: 36%;
+    transform: scale(0.7);
+  }
+
+  .carousel-card > div {
+    font-size: 0.8rem;
+  }
+}
+
+/* Too Extra small devices (phones, 450px and down) */
+@media only screen and (max-width: 400px) {
+  .max-carousel-container {
+    padding: 0 10px;
+    margin: 50px 0;
+  }
+  
+  .max-carousel-left-arrow {
+    left: 15px;
+    top: 40%;
+    transform: scale(0.8);
+  }
+  
+  .max-carousel-right-arrow {
+    right: 15px;
+    top: 40%;
+    transform: scale(0.8);
+  }
 }

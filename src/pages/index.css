@@ -4,38 +4,29 @@
   margin-top: 10px;
 }
 .nav{
-  --bs-nav-link-color: #A28E69;
+  --bs-nav-link-color: #F4EDE3;
   --bs-nav-link-hover-color: #a2967f
 }
 .nav-pills{
   padding: 2px;
 }
 .nav-pills > .nav-item{
-  /* color: #A28E69 */
-  border: 2px solid #A28E69;
+  /* color: #F4EDE3 */
+  border: 2px solid #F4EDE3;
   margin: 2px;
   border-radius: 0;
 }
 .nav-pills > .nav-item >.active{
-  background-color: #A28E69;
+  background-color: #F4EDE3;
   border-radius: 0;
 }
 
 .item-listing-add-to-cart{
   width: 100%;
-  border: 2px solid #A28E69;
+  border: 2px solid #F4EDE3;
 }
 .item-listing-add-to-cart:hover{
-  background-color: #A28E69;
-  color: white;
-}
-
-.non-selected-tab {
-
-}
-
-.selected-tab {
-  background-color: #A28E69;
+  background-color: #F4EDE3;
   color: white;
 }
 

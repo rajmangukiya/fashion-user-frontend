@@ -8,7 +8,6 @@ import AuthStorage from '../utils/AuthStorage';
 import { ApiGet, ApiPost, ApiPostNoAuth } from '../utils/ApiData.js';
 import { Banner, MaxCarousel } from '../components';
 import { MinCarousel } from '../components';
-import { useAuth, useUser } from '@clerk/clerk-react';
 import { loginAction } from '../redux/reducer/authReducer';
 //
 const Home = () => {
@@ -19,8 +18,6 @@ const Home = () => {
     const cart = [];
     const merchantId = process.env.REACT_APP_MERCHANT;
     const navigate = useNavigate();
-    const ssoAuthData = useAuth();
-    const ssoUserData = useUser();
 
     const openCategory = (name) => {
         navigate(`/category/${name}`)
@@ -61,40 +58,17 @@ const Home = () => {
         }
     }
 
-    const handlePostSSOAuth = async () => {
-        try {
-            if (ssoUserData?.user) {
-                const res = await ApiPostNoAuth('auth/login', {
-                    email: ssoUserData?.user?.primaryEmailAddress.emailAddress,
-                    firstName: ssoUserData?.user?.firstName,
-                    lastName: ssoUserData?.user?.lastName,
-                    mobile: ssoUserData?.user?.phoneNumbers.map(number => number.phoneNumber),
-                    avatar: ssoUserData?.user?.imageUrl,
-                    merchantId
-                });
-                dispatch(loginAction(res?.data?.token))
-            }
-        } 
-            catch (error) {
-            console.log(error);
-        }
-    }
-
     useEffect(() => {
         fetchItems();
         fetchCategories();
     }, [])
-
-    useEffect(() => {
-        handlePostSSOAuth()
-    }, [ssoUserData?.user])
     
     useEffect(() => {
         console.log('items', items);
     }, [items])
     
     return (
-        <div>
+        <div className='pb-5'>
             <Banner />
 
             {/* All Collections Carousel */}

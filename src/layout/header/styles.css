@@ -1,0 +1,141 @@
+.navbar-container {
+    padding: 0 120px;
+    position: fixed;
+    z-index: 2000;
+    background-color: #F4EDE3;
+}
+
+.navbar-main { 
+    height: 110px;
+}
+
+.brand-name {
+    font-family: 'Gruppo', sans-serif;
+    cursor: pointer;
+    /* padding-right: 50px; */
+}
+
+.navbar-buttons {
+    font-family: 'Ysabeau Office', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.navbar-dropdown {
+    display: none;
+    max-height: 60vh;
+    overflow-x: hidden;
+    -ms-overflow-style: none !important;  /* IE and Edge */
+    scrollbar-width: none !important;  /* Firefox */
+}
+
+.navbar-dropdown::-webkit-scrollbar{
+    display: none !important;
+  }
+
+.navbar-dropdown-buttons-container1 {
+    display: flex;
+}
+
+.navbar-dropdown-buttons-container3 {
+    margin: 0 200px 0 0;
+}
+
+.navbar-ham {
+    display: none;
+}
+
+.header-cart-count {
+    right: -10px;
+    top: -20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-ham {
+        display: none !important;
+    }
+
+    .navbar-dropdown-buttons-container1 {
+        display: flex !important;
+    }
+
+    .navbar-dropdown-buttons-container3 {
+        display: block !important;
+    }
+
+    .navbar-dropdown-icon {
+        display: none;
+    }
+
+    .navbar-dropdown-shop-title-container {
+        display: none !important;
+    }
+
+    .navbar-category-title {
+        font-size: 900 !important;
+    }
+
+    /* .navbar-dropdown-buttons-container1 {
+        display: flex !important;
+    } */
+}
+
+/* Large devices (laptops/desktops, 1200px and down) */
+@media only screen and (max-width: 1200px) {
+    .navbar-dropdown-buttons-container3 {
+        margin: 0;
+    }
+
+    .navbar-dropdown-buttons-container1 {
+        display: flex;
+        justify-content: space-between;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 992px and down) */
+  @media only screen and (max-width: 992px) {
+    
+  }
+  
+  /* Small devices (portrait tablets and large phones, 768px and down) */
+  @media only screen and (max-width: 768px) {
+    .navbar-container {
+        padding: 0 50px;
+    }
+
+    .navbar-ham {
+        display: block;
+    }
+
+    .navbar-main-buttons {
+        display: none;
+    }
+
+    .navbar-dropdown {
+        flex-direction: column;
+    }
+
+    .navbar-buttons {
+        font-weight: 400;
+    }
+
+    .navbar-dropdown-buttons-container2 {
+        padding: 0 20px;
+    }
+
+    .navbar-dropdown-buttons-container3 {
+        padding: 0 0 0 20px;
+    }
+  }
+  
+  /* Too Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: 600px) {
+    
+  }
+  
+  /* Too Extra small devices (phones, 450px and down) */
+  @media only screen and (max-width: 400px) {
+    .navbar-container {
+        padding: 0 30px;
+    }
+  }

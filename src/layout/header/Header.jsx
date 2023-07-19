@@ -1,14 +1,21 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import {BsCart2 } from 'react-icons/bs'
+import { BsCart2 } from 'react-icons/bs'
 import { BiUserCircle } from "react-icons/bi"
-import {Badge, Dropdown} from 'react-bootstrap';
+import { Badge, Dropdown } from 'react-bootstrap';
 import AuthStorage from '../../utils/AuthStorage';
+import { CiSearch } from 'react-icons/ci';
+import { BsBag } from 'react-icons/bs';
+import { RxHamburgerMenu } from 'react-icons/rx';
+import { GrClose } from 'react-icons/gr';
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import './styles.css'
+import { useRef } from 'react';
 
 function BasicExample() {
 
@@ -16,95 +23,170 @@ function BasicExample() {
   const { cartItems } = useSelector((state) => state.cart);
   const { userData } = useSelector((state) => state.authInfo);
   const isLogged = useSelector((state) => state.authInfo.isLogged);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState([]);
+  const [isShopOpen, setIsShopOpen] = useState(false);
+  const dropdown = useRef(null)
+  const hamIcon = useRef(null)
+  const closeIcon = useRef(null)
+  
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+  const categories = [
+    {
+      title: 'Clothing',
+      subCategories: [
+        'Sarees', 'Dresses', 'Tunic', 'Shirts & Tops', 'Kurtas', 'Anarkalis', 'Bottoms', 'Jackets', 'Abayas'
+      ]
+    },
+    {
+      title: 'Accessories',
+      subCategories: [
+        'Dresses', 'Tunic', 'Anarkalis', 'Bottoms', 'Abayas'
+      ]
+    },
+    {
+      title: 'Collections',
+      subCategories: [
+       'Shirts & Tops', 'Kurtas', 'Anarkalis', 'Bottoms', 'Jackets', 'Abayas'
+      ]
+    },
+    {
+      title: 'Featued',
+      subCategories: [
+        'Dresses', 'Tunic', 'Shirts & Tops', 'Kurtas', 'Anarkalis', 'Bottoms', 'Jackets'
+      ]
+    }
+  ]
 
-    window.addEventListener('resize', handleResize);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const getCartCount = userData?.cart?.reduce((acc, value) => acc + value?.quantity, 0)
 
   const openHome = () => {
     navigate('/');
   }
-  const openCollection = () => {
-    navigate('/collection');
-  }
+  // const openCollection = () => {
+  //   navigate('/collection');
+  // }
   const showCart = () => {
     navigate('/cart')
   }
 
-  const showCollection = () => {
-    navigate('/collection')
+  // const showCollection = () => {
+  //   navigate('/collection')
+  // }
+
+  // const getCartValue = () => {
+  //   const userQuantity = userData?.cart?.reduce((acc, val) => {
+  //     return acc + val.quantity
+  //   }, 0) ?? 0
+  //   return userQuantity
+  // }
+
+  const showDropdown = () => {
+    dropdown.current.style.display = 'flex'
   }
 
-  const getCartValue = () => {
-    const userQuantity = userData?.cart?.reduce((acc, val) => {
-      return acc + val.quantity
-    }, 0) ?? 0
-    return userQuantity
+  const hideDropDown = () => {
+    dropdown.current.style.display = 'none'
   }
+
+  const showDropdownMobile = () => {
+    dropdown.current.style.display = 'flex'
+    hamIcon.current.style.display = 'none'
+    closeIcon.current.style.display = 'block'
+  }
+
+  const hideDropDownMobile = () => {
+    dropdown.current.style.display = 'none'
+    hamIcon.current.style.display = 'block'
+    closeIcon.current.style.display = 'none'
+  }
+
+  const expandCategory = (index) => () => {
+    if (window.innerWidth < '768') setIsCategoriesOpen(prevStatuses => prevStatuses.map((prevStatus, index2) => index2 == index ? !prevStatus : prevStatus))
+  }
+
+  const expandShop = () => {
+    setIsShopOpen(prevIsShopOpen => !prevIsShopOpen)
+  }
+
+  const openMyAccount = () => {
+
+  }
+
+  const openSignin = () => {
+    navigate('sign-in')
+  }
+
+  useEffect(() => {
+    setIsCategoriesOpen(categories.map(_ => false))
+  }, [])
+
+  useEffect(() => {
+    console.log('userData', userData);
+  }, [userData])
 
   return (
-    <>
-    <Navbar fixed='top' className='border-bottom border-1' color='white' bg="white" expand="lg" >
-      <Container >
-        <Navbar.Brand style={{cursor: 'pointer'}} onClick={openHome} className='me-5 '>Fashion</Navbar.Brand>
-        <div className='order-lg-last' style={{ display:"flex" }}>
-          <div>
-          <BsCart2 onClick={showCart} size={25}/>
-            <Badge style={{fontSize: '10px'}} bg="danger" className="start-10 translate-middle">
-              {getCartValue()}
-            </Badge>
+    <div onMouseLeave={hideDropDown} className='navbar-container w-100'>
+      <div className='navbar-main d-flex align-items-center justify-content-between'>
+        <div onClick={openHome} className='brand-name fs-1 text-black'>Zivaanta</div>
+        <div className='d-flex align-items-center'>
+          <div onMouseEnter={showDropdown} className='navbar-buttons navbar-main-buttons navbar-shop-button text-black'>Shop</div>
+          <div 
+            onClick={isLogged ? openMyAccount : openSignin}
+            className='navbar-buttons navbar-main-buttons mx-4 text-black'
+          >{isLogged ? 'My Account' : 'Sign in'}</div>
+          <CiSearch className='fs-5' />
+          <div style={{cursor: 'pointer'}} className='ms-4 d-flex flex-column justify-content-center position-relative'>
+            <div className='header-cart-count position-absolute'>{getCartCount}</div>
+            <BsBag onClick={showCart} />
           </div>
-          { windowWidth > 992 &&
-            <NavDropdown  title={<BiUserCircle size={25}/>} id="basic-nav-dropdown">
-              <NavDropdown.Item href="/">User</NavDropdown.Item>
-              <NavDropdown.Item href="/">Orders</NavDropdown.Item>
-              {
-                isLogged ? 
-                <NavDropdown.Item href="/">Sign Out</NavDropdown.Item>
-                :
-                <NavDropdown.Item href="/sign-in">Sign In</NavDropdown.Item>
-              }
-            </NavDropdown>
-          }
+          <div ref={hamIcon} className='navbar-ham' onClick={showDropdownMobile} >
+            <RxHamburgerMenu className='ms-4 fs-5' />
+          </div>
+          <div ref={closeIcon} className='navbar-ham' style={{ display: 'none' }} onClick={hideDropDownMobile} >
+            <GrClose className='ms-4 fs-5' />
+          </div>
         </div>
-        <Navbar.Toggle aria-controls="basic-navbar-nav "  />
-        <Navbar.Collapse id="basic-navbar-nav " >
-          <Nav className="me-auto">
-            <NavDropdown className='mx-3' title="Shop" id="basic-nav-dropdown">
-              <NavDropdown.Header className='fw-bold'>Shop By Type</NavDropdown.Header>
-              <NavDropdown.Item href="/">Lahenga</NavDropdown.Item>
-              <NavDropdown.Item href="/">Dress</NavDropdown.Item>
-              <NavDropdown.Item href="/">Saree</NavDropdown.Item>
-              <NavDropdown.Header className='fw-bold'>Shop By Collection</NavDropdown.Header>
-              <NavDropdown.Item href="/">All Collection</NavDropdown.Item>
-              <NavDropdown.Item href="/">New Arrival</NavDropdown.Item>
-              <NavDropdown.Item href="/">Best Selling</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link onClick={openCollection} className='mx-3'>Collections</Nav.Link>
-            <Nav.Link onClick={openHome} className='mx-3'>Contact</Nav.Link>
-            {windowWidth < 992 &&
-              <NavDropdown className='mx-3' title={<BiUserCircle size={25}/>} id="basic-nav-dropdown">
-                <NavDropdown.Item href="/">User</NavDropdown.Item>
-                <NavDropdown.Item href="/">Orders</NavDropdown.Item>
-                <NavDropdown.Item href="/">Sign In</NavDropdown.Item>
-                <NavDropdown.Item href="/">Sign Out</NavDropdown.Item>
-            </NavDropdown>
+      </div>
+      <div ref={dropdown} className='navbar-dropdown pt-3 pb-5'>
+          <div onClick={expandShop} className={`navbar-dropdown-shop-title-container d-flex justify-content-between align-items-center`}>
+            <div className={`${isShopOpen ? 'fw-bold' : ''} navbar-buttons text-black mb-2`}>Shop</div>
+            {
+              isShopOpen
+              ? <BsChevronUp className='navbar-dropdown-icon' />
+              : <BsChevronDown className='navbar-dropdown-icon' />
             }
-            </Nav>
-        </Navbar.Collapse>         
-      </Container>
-    </Navbar>
-    </>
+          </div>
+          <div className={`${isShopOpen ? 'd-block' : 'd-none'} navbar-dropdown-buttons-container1 w-100`}>
+          {
+            categories.map((category, index) => (
+              <div className='navbar-dropdown-buttons-container2'>
+                <div onClick={expandCategory(index)} className='d-flex w-100 justify-content-between align-items-center py-2'>
+                  <div className={`${isCategoriesOpen[index] ? 'fw-bold' : ''} navbar-buttons navbar-category-title text-black`}>{category?.title}</div>
+                  {
+                    isCategoriesOpen[index]
+                    ? <BsChevronUp className='navbar-dropdown-icon' />
+                    : <BsChevronDown className='navbar-dropdown-icon' />
+                  }
+                </div>
+                <div className={`${isCategoriesOpen[index] ? 'd-block' : 'd-none'} navbar-dropdown-buttons-container3 mt-2`}>
+                  {
+                    category.subCategories.map(category => (
+                      <div className='navbar-buttons text-black mb-2'>{category}</div>
+                    ))
+                  }
+                </div>
+              </div>
+            ))
+          }
+          </div>
+          <div className={`navbar-dropdown-shop-title-container d-flex justify-content-between align-items-center`}>
+            <div 
+              className='navbar-buttons text-black mt-2'
+              onClick={isLogged ? openMyAccount : openSignin}
+            >{isLogged ? 'My Account' : 'Sign in'}</div>
+          </div>
+      </div>
+    </div>
   );
 }
 

@@ -42,6 +42,7 @@ const MaxCarousel = ({categories}) => {
       infinite={true}
       keyBoardControl={true}
       containerClass="max-carousel-sub-container"
+      customTransition='all 50'
       // dotListClass="custom-dot-list-style"
       className='w-100'
       customLeftArrow={<CustomLeftArrow size='50px' className='max-carousel-left-arrow'/>}

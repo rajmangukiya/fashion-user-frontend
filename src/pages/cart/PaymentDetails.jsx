@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ApiPost } from '../../utils/ApiData';
-import {load} from '@cashfreepayments/cashfree-js';
+import { load } from '@cashfreepayments/cashfree-js';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../../redux/reducer/authReducer';
 
@@ -39,7 +39,7 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
             return ApiPost("order/createOrder", orderData)
 
         } catch (error) {
-            
+
         }
     }
 
@@ -51,11 +51,11 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
             paymentSessionId: orderDetails.data.payment_session_id,
             returnUrl: "http://localhost:3000",
         }
-        cashfree.checkout(checkoutOptions).then(function(result){
-            if(result.error){
+        cashfree.checkout(checkoutOptions).then(function (result) {
+            if (result.error) {
                 alert(result.error.message)
             }
-            if(result.redirect){
+            if (result.redirect) {
                 // dispatch(clearCart())
             }
         });
@@ -65,44 +65,44 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
         try {
             const orderDetails = await createOrder()
             await initializePayment(orderDetails)
-            
+
         } catch (error) {
             console.log(error);
-        } 
+        }
     }
-    
+
     useEffect(() => {
-      console.log('userData', userData);
+        console.log('userData', userData);
     }, [userData])
-    
+
 
     return (
-        <div className='w-100 d-flex justify-content-center mt-5 pt-5'>
-        <div style={{width: '30%'}} className='border border-1 p-5'>
-        <div className='fs-5 mb-4'>Price Details</div>
-                <div className='d-flex justify-content-between mb-1'>
+        <div className='w-100 d-flex justify-content-center mt-5'>
+            <div className='pd-price-box border border-1 p-5'> 
+                <div className='bg1-price-title fs-5 mb-4'>Price Details</div>
+                <div className='bg1-text-container d-flex justify-content-between mb-1'>
                     <div>Total MRP</div>
                     <div>₹ {getPriceDetails().totalMrp}</div>
                 </div>
-                <div className='d-flex justify-content-between mb-1'>
+                <div className='bg1-text-container d-flex justify-content-between mb-1'>
                     <div>GST</div>
                     <div>₹ {getPriceDetails().gst}</div>
                 </div>
-                <div className='d-flex justify-content-between mb-1'>
+                <div className='bg1-text-container d-flex justify-content-between mb-1'>
                     <div>Shipping Charges</div>
                     <div>₹ {getPriceDetails().shippingCharges}</div>
                 </div>
                 <div className='border-bottom border-1 my-3'></div>
-                <div className='d-flex justify-content-between'>
+                <div className='bg1-text-container d-flex justify-content-between'>
                     <div>Total Amount</div>
                     <div>₹ {getPriceDetails().totalAmount}</div>
                 </div>
-                <div 
-                    style={{backgroundColor: '#A28E69', cursor: 'pointer'}} 
-                    className='text-white py-2 text-center mt-4'
+                <div
+                    style={{ backgroundColor: '#876952', cursor: 'pointer' }}
+                    className='bg1-text-container text-white py-2 text-center mt-4'
                     onClick={makePayment}
                 >Pay Now</div>
-        </div>
+            </div>
         </div>
     )
 }

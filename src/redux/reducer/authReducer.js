@@ -20,15 +20,16 @@ export const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
-    loginAction: (state, data) => {
-      data.payload && AuthStorage.setStorageJsonData(STORAGEKEY.token, data.payload, true);
+    loginAction: (state) => {
       state.isLogged = true
     },
     logoutAction: (state) => {
+      AuthStorage.deauthenticateUser()
       state.isLogged = false
     },
     setUserData: (state, action) => {
       state.userData = action.payload
+      state.isLogged = true
     },
     addToCart: (state, action) => {
       let reduxItem = [{

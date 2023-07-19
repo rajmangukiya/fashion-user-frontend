@@ -1,0 +1,77 @@
+.login-title {
+    font-family: 'Ysabeau Office', sans-serif;
+    margin: 100px 0 150px 0 !important;
+    letter-spacing: 10px;
+}
+
+.login-form {
+    width: 400px;
+}
+
+.login-label {
+    font-family: 'Ysabeau Office', sans-serif;
+    margin-bottom: 5px;
+}
+
+.login-input {
+    border: #87695231 1px solid;
+    font-family: 'Ysabeau Office', sans-serif;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+}
+
+.login-input:focus {
+    border: #876952 1px solid;
+}
+
+.login-sign-in {
+    font-family: 'Ysabeau Office', sans-serif;
+    background-color: #876952;
+    color: white;
+    margin-top: 10px;
+    letter-spacing: 3px;
+    cursor: not-allowed;
+}
+
+.login-google-container {
+    font-family: 'Ysabeau Office', sans-serif;
+    border: #8769524d 1px solid;
+    cursor: pointer;
+}
+
+.login-back-arrow {
+    color: #876952;
+    cursor: pointer;
+    margin: 50px 0 0 50px;
+}
+
+/* Large devices (laptops/desktops, 1200px and down) */
+@media only screen and (max-width: 1200px) {
+    
+}
+
+/* Medium devices (landscape tablets, 992px and down) */
+@media only screen and (max-width: 992px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+
+}
+
+/* Too Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .login-form {
+        width: 80%;
+    }
+
+    .login-back-arrow {
+        margin-left: 30px;
+    }
+}
+
+/* Too Extra small devices (phones, 450px and down) */
+@media only screen and (max-width: 400px) {
+
+}

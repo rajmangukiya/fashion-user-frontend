@@ -1,5 +1,5 @@
 import Home from '../pages/Home'
-import Login from '../pages/Login'
+import Login from './login/Login'
 import Category from '../pages/Category'
 import Item from './item/Item'
 import Cart from './cart/Cart'
