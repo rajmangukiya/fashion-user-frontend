@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import './css/main.css';
 import { Provider } from 'react-redux';
 import Router from './router/Router';
@@ -8,9 +8,9 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
           <Router />
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     </div>
   );

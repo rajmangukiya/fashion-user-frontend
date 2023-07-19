@@ -16,7 +16,7 @@ const Router = () => {
                     <Route path="sign-in" element={<Login />} />
                     <Route path="/item/:itemId" element={<Item />} />
                     <Route path="/" element={<Home />} />
-                    <Route path="/cart" element={<AuthWrapper Component={Cart} />} />
+                    <Route path="/cart" element={<Cart />} />
                     <Route path="/collection" element={<ItemListing />} />
                     {/* <Route path="/" exact element={<Home />} /> */}
                 </Routes>

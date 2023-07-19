@@ -36,7 +36,7 @@ const Layout = ({ children, ...props }) => {
     useEffect(() => {
         if (queryToken && queryToken != '' && queryToken != null) { 
             AuthStorage.setStorageJsonData(STORAGEKEY.token, queryToken, true)
-            navigate('/')
+            window.location.href = 'http://localhost:3000'
         }
         authCheck()
     }, [])
@@ -44,7 +44,6 @@ const Layout = ({ children, ...props }) => {
     return (
         <div className='min-vh-100 d-flex flex-column'>
             {location.pathname != "/sign-in" && <Header />}
-            {/* <Header/> */}
             <div className='flex-grow-1' {...props}>{children}</div>
             <Footer/>
         </div>

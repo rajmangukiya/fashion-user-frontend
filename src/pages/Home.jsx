@@ -63,10 +63,6 @@ const Home = () => {
         fetchCategories();
     }, [])
     
-    useEffect(() => {
-        console.log('items', items);
-    }, [items])
-    
     return (
         <div className='pb-5'>
             <Banner />
