@@ -1,6 +1,6 @@
-const protocol = 'http';
-const host = '192.168.1.35';
-const port = '5000';
+const protocol = 'https';
+const host = 'fashion-backend-yzxd.onrender.com';
+const port = '';
 const trailUrl = 'api/v1/consumer';
 
 const hostUrl = `${protocol}://${host}${port ? ':' + port : ''}/`;

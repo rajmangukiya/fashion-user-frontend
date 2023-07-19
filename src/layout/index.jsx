@@ -36,7 +36,7 @@ const Layout = ({ children, ...props }) => {
     useEffect(() => {
         if (queryToken && queryToken != '' && queryToken != null) { 
             AuthStorage.setStorageJsonData(STORAGEKEY.token, queryToken, true)
-            window.location.href = process.env.REACT_APP_CLIENT_URL
+            window.location.href = process.env.REACT_APP_CLIENT_ROOT_URL
         }
         authCheck()
     }, [])

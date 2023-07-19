@@ -111,7 +111,7 @@ const AddressDetails = ({ userData, setSelectedTab, addressDetails, setAddressDe
                 <div 
                     style={{backgroundColor: '#876952', cursor: 'pointer'}} 
                     className='bg1-text-container text-white py-2 text-center mt-4'
-                    onClick={() => setSelectedTab('address')}
+                    onClick={() => setSelectedTab('payment')}
                 >Continue to Shipping</div>
             </div>
         </div>
