@@ -3,6 +3,7 @@ import { ApiPost } from '../../utils/ApiData';
 import { load } from '@cashfreepayments/cashfree-js';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../../redux/reducer/authReducer';
+import axios from 'axios';
 
 const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
 
@@ -10,62 +11,43 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
 
     const dispatch = useDispatch()
 
-    const createOrder = () => {
+    const createOrderAndGetPaymentUrl = () => {
         try {
             const orderData = {
                 itemDetails: userData.cart.map(cartItem => {
-                    console.log(cartItem.item._id);
                     return ({
                         itemId: cartItem?.item?._id,
                         quantity: cartItem?.quantity
                     })
                 }),
-                merchantId,
                 amount: getPriceDetails().totalAmount,
                 instruction: 'no instruction',
                 addressDetails: {
                     first_name: addressDetails?.firstName,
                     last_name: addressDetails?.lastName,
                     email: addressDetails?.email,
-                    mobile: addressDetails?.mobile,
+                    mobile: addressDetails?.mobile[0],
                     company: addressDetails?.company,
                     address: addressDetails?.address,
                     landmark: addressDetails?.landmark,
+                    city: addressDetails?.city,
                     state: addressDetails?.state,
                     country: addressDetails?.country,
                     pincode: addressDetails?.pincode
                 }
             }
-            return ApiPost("order/createOrder", orderData)
+            return ApiPost("payment/phonepe/pay", orderData)
 
         } catch (error) {
 
         }
     }
 
-    const initializePayment = async (orderDetails) => {
-        const cashfree = await load({
-            mode: "sandbox" //or production
-        });
-        let checkoutOptions = {
-            paymentSessionId: orderDetails.data.payment_session_id,
-            returnUrl: "http://localhost:3000",
-        }
-        cashfree.checkout(checkoutOptions).then(function (result) {
-            if (result.error) {
-                alert(result.error.message)
-            }
-            if (result.redirect) {
-                // dispatch(clearCart())
-            }
-        });
-    }
-
     const makePayment = async () => {
         try {
-            const orderDetails = await createOrder()
-            await initializePayment(orderDetails)
-
+            const orderDetails = await createOrderAndGetPaymentUrl()
+            // await initializePayment(orderDetails)
+            window.location.href = orderDetails.data.url
         } catch (error) {
             console.log(error);
         }
@@ -75,6 +57,9 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
         console.log('userData', userData);
     }, [userData])
 
+    useEffect(() => {
+        console.log('addressDetails', addressDetails);
+    }, [addressDetails])
 
     return (
         <div className='w-100 d-flex justify-content-center mt-5'>

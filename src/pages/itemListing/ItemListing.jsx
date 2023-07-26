@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ApiPost } from '../../utils/ApiData';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../redux/reducer/authReducer';
 import './styles.css'
 
 const ItemListing = () => {
@@ -42,20 +41,6 @@ const ItemListing = () => {
         setFilteredItems(data.filter(item => item.category == (activeCategory == '' ? activeCategoryId : activeCategory)))
     } catch (error) {
         console.log(error)
-    }
-  }
-
-  const addToCartHandler = (item) => async () => {
-    try {
-      if (isLogged) {
-        dispatch(addToCart(item));
-        await ApiPost("item/addToCart", { itemId: item._id, quantity: 1 });
-      }
-      else {
-        navigate('/sign-in')
-      }
-    } catch (error) {
-      console.log(error);
     }
   }
 

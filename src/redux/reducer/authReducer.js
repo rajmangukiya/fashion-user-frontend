@@ -34,17 +34,18 @@ export const userDataSlice = createSlice({
     addToCart: (state, action) => {
       let reduxItem = [{
           item: action.payload.item,
+          size: action.payload.size,
           quantity: action.payload.itemCount
       }]
       state.userData = {
         ...state.userData,
         cart: [
           ...(state.userData?.cart?.map(cartItem => {
-              if(cartItem?.item?._id == reduxItem[0]?.item?._id) {
+              if(cartItem?.item?._id == reduxItem[0]?.item?._id && cartItem?.size == reduxItem[0].size) {
                   reduxItem = [];
-                  console.log("payload", action.payload.itemCount)
                   return {
                       item: cartItem.item,
+                      size: cartItem.size,
                       quantity: cartItem.quantity + action.payload.itemCount
                   }
               }
@@ -61,25 +62,27 @@ export const userDataSlice = createSlice({
       }
     },
     decreaseFromCart: (state, action) => {
-      const itemId = action.payload
+      const cartItem = action.payload
       state.userData = {
         ...state.userData,
-        cart: state.userData.cart.map(cartItem => {
-          if(cartItem.item._id == itemId && cartItem.quantity > 1) {
+        cart: state.userData.cart.map(_cartItem => {
+          if(_cartItem.item._id == cartItem.item._id && _cartItem.size == cartItem.size && _cartItem.quantity > 1) {
             return {
-              ...cartItem,
-              quantity: cartItem.quantity - 1
+              ..._cartItem,
+              quantity: _cartItem.quantity - 1
             }
           }
-          return cartItem
+          return _cartItem
         })
       }
     },
     removeFromCart: (state, action) => {
-      const itemId = action.payload
+      const cartItem = action.payload
       state.userData = {
         ...state.userData,
-        cart: state.userData.cart.filter(cartItem => cartItem.item._id != itemId)
+        cart: state.userData.cart.filter(_cartItem => {
+          return (_cartItem?.item?._id != cartItem?.item?._id || _cartItem?.size != cartItem?.size)
+        })
       }
     },
     removeUserData: (state) => {

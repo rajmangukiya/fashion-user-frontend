@@ -52,8 +52,9 @@ const Item = () => {
 
     const addItemToCart = (item, itemCount) => async () => {
         try {
-            dispatch(addToCart({item, itemCount}));
-            await ApiPost("item/addToCart", { itemId: item._id, quantity: itemCount });
+            if(itemCount == 0) return
+            dispatch(addToCart({item, itemCount, size: sizes[selectedSize]}));
+            await ApiPost("item/addToCart", { itemId: item?._id, size: sizes[selectedSize], quantity: itemCount });
             setItemCount(0)
         } catch (error) {
             console.log(error)
@@ -61,59 +62,8 @@ const Item = () => {
     }
 
     const checkIsItemInCart = (itemId) => {
-        console.log('userData', userData);
         if (userData?.cart?.find(cartItem => cartItem.item._id == itemId)) setIsItemInCart(true)
         else setIsItemInCart(false)
-    }
-
-    const loadScript = (src) => {
-        return new Promise((resolve, reject) => {
-            const script = document.createElement('script')
-            script.src = src
-            script.onload = () => {
-                resolve()
-            }
-            script.onerror = () => {
-                reject()
-            }
-            document.body.appendChild(script)
-        })
-    }
-
-    const buyNow = async () => {
-        try {
-            await loadScript('https://checkout.razorpay.com/v1/checkout.js');
-            const { data } = await ApiPostNoAuth('payment/createRazorpayOrder', {amount: 500});
-            const options = {
-                "key": 'rzp_test_oolCMq6FN4WSTv',
-                "amount": "50000",
-                "currency": "INR",
-                "name": "Rainbow Tech",
-                "description": "Test Transaction",
-                "image": "https://sastabazzars.in/wp-content/uploads/2022/10/ProductCImage_79415.jpg",
-                "order_id": data.id,
-                "handler": function (response){
-                    alert(response.razorpay_payment_id);
-                    alert(response.razorpay_order_id);
-                    alert(response.razorpay_signature)
-                },
-                "prefill": {
-                    "name": "Gaurav Kumar",
-                    "email": "gaurav.kumar@example.com",
-                    "contact": "9000090000"
-                },
-                "notes": {
-                    "address": "Razorpay Corporate Office"
-                },
-                "theme": {
-                    "color": "#3399cc"
-                }
-            };
-        const paymentObject = new window.Razorpay(options);
-        paymentObject.open();
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     const fetchItem = async () => {
@@ -129,10 +79,6 @@ const Item = () => {
       fetchItem()
       checkIsItemInCart()
     }, [])
-
-    useEffect(() => {
-        console.log('item1', item);
-    }, [item])
 
     return (
         <div className='main-item-container d-flex flex-column align-items-center mt-5 pt-5 pb-5'>

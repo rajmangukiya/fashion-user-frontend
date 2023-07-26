@@ -21,6 +21,7 @@ const Cart = () => {
         company: userData?.addressDetails?.company ?? '',
         address: userData?.addressDetails?.address ?? '',
         landmark: userData?.addressDetails?.landmark ?? '',
+        city: userData?.addressDetails?.city ?? '',
         state: userData?.addressDetails?.state ?? '',
         country: userData?.addressDetails?.country ?? '',
         pincode: userData?.addressDetails?.pincode ?? ''
@@ -71,9 +72,9 @@ const Cart = () => {
                 >Address</div>
                 <div style={{width: '10%'}} className='cart-tab-line border-bottom border-2 mx-4'></div>
                 <div
-                    style={{color: `${selectedTab == 'payment' ? '#876952' : '#000000'}`, cursor: 'pointer'}} 
+                    style={{color: `${selectedTab == 'payment' ? '#876952' : '#000000'}`}} 
                     className={`cart-tab-title ${selectedTab == 'payment' ? 'fs-5' : ''}`}
-                    onClick={() => setSelectedTab('payment')}
+                    // onClick={() => setSelectedTab('payment')}
                 >Payment</div>
             </div>
         </div>

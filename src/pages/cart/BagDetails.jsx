@@ -8,29 +8,29 @@ const BagDetails = ({ setSelectedTab, userData, getPriceDetails }) => {
 
     const dispatch = useDispatch()
 
-    const increaseQuantity = (item) => async () => {
+    const increaseQuantity = (cartItem) => async () => {
         try {
-            dispatch(addToCart({item, itemCount: 1}));
-            await ApiPost("item/addToCart", { itemId: item._id, quantity: 1 });
+            dispatch(addToCart({item: cartItem?.item, size: cartItem?.size, itemCount: 1}));
+            // await ApiPost("item/addToCart", { itemId: cartItem?.item?._id, size: cartItem?.size, quantity: 1 });
         } catch (error) {
             console.log(error);
         }
     }
 
-    const decreaseQuantity = (itemId, quantity) => async () => {
+    const decreaseQuantity = (cartItem) => async () => {
         try {
-            if (quantity <= 1) return
-            dispatch(decreaseFromCart(itemId));
-            await ApiPost("item/removeFromCart", { itemId, isRemove: false });
+            if (cartItem.quantity <= 1) return
+            dispatch(decreaseFromCart(cartItem));
+            await ApiPost("item/removeFromCart", { itemId: cartItem?.item?._id, size: cartItem?.size, isRemove: false });
         } catch (error) {
             console.log(error);
         }
     }
 
-    const removeFromCartHandler = (itemId) => async () => {
+    const removeFromCartHandler = (cartItem) => async () => {
         try {
-            dispatch(removeFromCart(itemId));
-            await ApiPost("item/removeFromCart", { itemId, isRemove: true });
+            dispatch(removeFromCart(cartItem));
+            await ApiPost("item/removeFromCart", { itemId: cartItem?.item?._id, size: cartItem?.size, isRemove: true });
         } catch (error) {
             console.log(error);
         }
@@ -51,7 +51,7 @@ const BagDetails = ({ setSelectedTab, userData, getPriceDetails }) => {
                                 <div className='bg1-size-quantity-container d-flex'>
                                     <div className='d-flex flex-column align-items-baseline'>
                                         <div className='bg1-item-size-title mb-1 text-black'>Size:</div>
-                                        <div className='bg1-item-size px-3 me-4 text-black border border-1 border-dark bg-opacity-75 flex-grow-1 d-flex align-items-center'>S</div>
+                                        <div className='bg1-item-size px-3 me-4 text-black border border-1 border-dark bg-opacity-75 flex-grow-1 d-flex align-items-center'>{cartItem?.size}</div>
                                     </div>
                                     <div className='bg1-item-quantity d-flex flex-column justify-content-end flex-grow-1'>
                                         <div className='bg1-item-quantity-title mb-1'>Quantity:</div>
@@ -60,19 +60,19 @@ const BagDetails = ({ setSelectedTab, userData, getPriceDetails }) => {
                                                 <div 
                                                     style={{cursor: 'pointer'}} 
                                                     className=''
-                                                    onClick={decreaseQuantity(cartItem?.item?._id, cartItem?.quantity)}
+                                                    onClick={decreaseQuantity(cartItem)}
                                                 >-</div>
                                                 <div className='mx-4'>{cartItem?.quantity}</div>
                                                 <div 
                                                     style={{cursor: 'pointer'}} 
                                                     className=''
-                                                    onClick={increaseQuantity(cartItem?.item)}
+                                                    onClick={increaseQuantity(cartItem)}
                                                 >+</div>
                                             </div>
                                             <div 
                                                 style={{cursor: 'pointer', backgroundColor: '#876952'}}
                                                 className='bg1-quantity-box text-white d-flex align-items-center px-5'
-                                                onClick={removeFromCartHandler(cartItem?.item?._id)}
+                                                onClick={removeFromCartHandler(cartItem)}
                                             >Remove</div>
                                         </div>
                                     </div>
