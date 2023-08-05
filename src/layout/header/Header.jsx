@@ -109,7 +109,7 @@ function BasicExample() {
   }
 
   const openMyAccount = () => {
-
+    navigate('my-account')
   }
 
   const openSignin = () => {

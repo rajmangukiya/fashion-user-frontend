@@ -1,0 +1,56 @@
+.category-tab {
+    padding: 7px 30px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.selected-tab {
+    background-color: #876952;
+    color: white;
+}
+
+/* Large devices (laptops/desktops, 1200px and down) */
+@media only screen and (max-width: 1200px) {
+  
+}
+
+/* Medium devices (landscape tablets, 992px and down) */
+@media only screen and (max-width: 992px) {
+  .category-tab {
+    padding: 7px 30px;
+    margin: 5px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .category-tab {
+    padding: 5px 20px;
+    margin: 3px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small devices (phones, 500px and down) */
+@media only screen and (max-width: 500px) {
+  .category-tab {
+    padding: 5px 20px;
+    margin: 3px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Too Extra small devices (phones, 400px and down) */
+@media only screen and (max-width: 400px) {
+  .category-tab {
+    padding: 5px 10px;
+    margin: 3px;
+  }
+}

@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ApiPost } from '../../utils/ApiData';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { CustomTabs } from '../../components/baseComponents/Utils'
 import './styles.css'
 
 const ItemListing = () => {
@@ -24,9 +25,9 @@ const ItemListing = () => {
     try {
         const {data} = await ApiPost('category/getCategories', { merchantId });
         setCategories(data);
-        if (activeCategory == '') {
-          setActiveCategory(data[0]._id)
-        }
+        // if (activeCategory == '') {
+        //   setActiveCategory(data[0]._id)
+        // }
         fetchItems(data[0]._id)
     } catch (error) {
         console.log(error);
@@ -36,17 +37,16 @@ const ItemListing = () => {
   const fetchItems = async (activeCategoryId) => {
     try {
         const {data} = await ApiPost("item/getItems", { merchantId });
-        console.log("activeCategoryId", activeCategoryId);
         setItems(data);
-        setFilteredItems(data.filter(item => item.category == (activeCategory == '' ? activeCategoryId : activeCategory)))
+        // setFilteredItems(data.filter(item => item.category == (activeCategory == '' ? activeCategoryId : activeCategory)))
     } catch (error) {
         console.log(error)
     }
   }
 
-  const handleTabChange = (categoryId) => () => {
-    setActiveCategory(categoryId);
-    setFilteredItems(items.filter(item => item.category == categoryId))
+  const handleTabChange = (category) => {
+    setActiveCategory(category?._id);
+    setFilteredItems(items.filter(item => item.category == category?._id))
   };
 
   const openItem = (itemId) => () => {
@@ -61,19 +61,13 @@ const ItemListing = () => {
 
   return (
     <div className='item-list-container mt-5 d-flex flex-column flex-grow-1'>
-      <div className='d-flex w-100 flex-wrap justify-content-center'>
-        {
-          categories.map((category, index) => (
-            <div 
-              key={index} 
-              onClick={handleTabChange(category?._id)} 
-              className={`${category._id == activeCategory ? 'selected-tab' : 'border border-1'} category-tab`}
-            >
-              {category.name}
-            </div>
-          ))
-        }
-      </div>
+      <CustomTabs
+        tabList = {categories} // element should have name key in it
+        onTabChange = {handleTabChange}
+        keyName = "name"
+        defaultIndex = {0}
+        reRenderOn = {[items]}
+      />
       <div className='d-flex h-100 w-100 flex-wrap justify-content-center p-4'>
           {
             filteredItems?.length

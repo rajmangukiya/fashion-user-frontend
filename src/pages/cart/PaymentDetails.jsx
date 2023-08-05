@@ -17,7 +17,8 @@ const PaymentDetails = ({ userData, addressDetails, getPriceDetails }) => {
                 itemDetails: userData.cart.map(cartItem => {
                     return ({
                         itemId: cartItem?.item?._id,
-                        quantity: cartItem?.quantity
+                        quantity: cartItem?.quantity,
+                        size: cartItem?.size
                     })
                 }),
                 amount: getPriceDetails().totalAmount,
