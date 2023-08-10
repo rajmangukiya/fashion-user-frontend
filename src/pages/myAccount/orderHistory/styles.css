@@ -1,0 +1,107 @@
+.oh-items-container {
+    width: 67%;
+    padding: 40px;
+}
+
+.oh-item-container > img {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+}
+
+.oh-item-description {
+    font-size: 15px;
+}
+
+.oh-status {
+    font-size: 14px;
+    /* border-color: #876952 !important; */
+    background-color: #87695222;
+}
+
+.oh-status-circle {
+    width: 12px;
+    height: 12px;
+}
+
+/* Large devices (laptops/desktops, 1200px and down) */
+@media only screen and (max-width: 1200px) {
+
+    .oh-items-container {
+        width: 90%;
+        padding: 40px;
+    }
+}
+
+/* Medium devices (landscape tablets, 992px and down) */
+@media only screen and (max-width: 992px) {
+   
+}
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+
+    .oh-item-size {
+        padding: 3px 8px !important;
+        /* margin-right: 10px !important; */
+        font-size: 12px !important;
+    }
+}
+
+/* Too Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .oh-items-container {
+        padding: 20px;
+    }
+
+    .oh-item-size {
+        padding: 2px 8px !important;
+        font-size: 11px !important;
+    }
+
+    .oh-item-title {
+        font-size: 16px !important;
+        font-weight: 500 !important;
+    }
+
+    .oh-item-description {
+        font-size: 13px !important;
+    }
+
+    .oh-item-price {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+    }
+
+    .oh-item-container > img {
+        margin-right: 30px !important;
+    }
+}
+
+/* Too Extra small devices (phones, 450px and down) */
+@media only screen and (max-width: 400px) {
+    .oh-container {
+        margin: 20px 0 !important;
+    }
+
+    .oh-items-container {
+        padding: 10px !important;
+    }
+
+    .oh-item-container > img {
+        margin-right: 10px !important;
+    }
+
+    .oh-price-container {
+        padding: 20px !important;
+    }
+
+    .oh-price-title {
+        font-size: 15px !important;
+    }
+
+    .oh-text-container {
+        font-size: 13px !important;
+    }
+}

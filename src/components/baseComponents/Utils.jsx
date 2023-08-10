@@ -19,7 +19,7 @@ export const Input = ({ value, onChange, placeholder, containerClassName, inputC
   )
 }
 
-export const CustomTabs = ({ tabList, onTabChange, keyName, defaultIndex, reRenderOn }) => {
+export const CustomTabs = ({ tabList, onTabChange, keyName, defaultIndex, reRenderOn, type }) => {
   const [selectedTab, setSelectedTab] = useState(defaultIndex)
 
   const tabChangeHandler = (tab, index) => () => {
@@ -27,22 +27,35 @@ export const CustomTabs = ({ tabList, onTabChange, keyName, defaultIndex, reRend
     onTabChange(tab)
   }
 
+  const getClassName = (index) => {
+    switch (type) {
+      case "box":
+        return `${selectedTab === index ? 'box-selected-tab' : ''} box-category-tab`
+
+      case "line":
+        return `${selectedTab === index ? 'line-selected-tab' : ''} line-category-tab`
+
+      default:
+        break;
+    }
+  }
+
   useEffect(() => {
     setSelectedTab(defaultIndex)
     onTabChange(tabList[defaultIndex])
   }, [defaultIndex, ...reRenderOn])
-  
+
 
   return (
-    <div className='d-flex w-100 flex-wrap justify-content-center'>
+    <div className='ct-container d-flex'>
       {
         tabList.map((tab, index) => (
           <div
             key={index}
             onClick={tabChangeHandler(tab, index)}
-            className={`${selectedTab == index ? 'selected-tab' : 'border border-1'} category-tab`}
+            className={`${getClassName(index)} text-nowrap`}
           >
-            {tab[keyName]}
+            {keyName == "" ? tab : tab[keyName]}
           </div>
         ))
       }

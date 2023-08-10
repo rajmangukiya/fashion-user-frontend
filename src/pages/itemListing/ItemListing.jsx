@@ -36,7 +36,7 @@ const ItemListing = () => {
 
   const fetchItems = async (activeCategoryId) => {
     try {
-        const {data} = await ApiPost("item/getItems", { merchantId });
+        const { data } = await ApiPost("item/getItems", { merchantId });
         setItems(data);
         // setFilteredItems(data.filter(item => item.category == (activeCategory == '' ? activeCategoryId : activeCategory)))
     } catch (error) {
@@ -67,6 +67,7 @@ const ItemListing = () => {
         keyName = "name"
         defaultIndex = {0}
         reRenderOn = {[items]}
+        type = "box"
       />
       <div className='d-flex h-100 w-100 flex-wrap justify-content-center p-4'>
           {

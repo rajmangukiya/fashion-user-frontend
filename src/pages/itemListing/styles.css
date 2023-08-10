@@ -2,13 +2,6 @@
   padding: 100px 0;
 }
 
-.category-tab {
-  padding: 7px 30px;
-  margin: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
 .item-list-card {
   width: 300px;
   padding: 0 5px;
@@ -25,11 +18,6 @@
   font-size: 1rem;
 }
 
-.selected-tab {
-  background-color: #876952;
-  color: white;
-}
-
 /* Large devices (laptops/desktops, 1200px and down) */
 @media only screen and (max-width: 1200px) {
   
@@ -37,12 +25,6 @@
 
 /* Medium devices (landscape tablets, 992px and down) */
 @media only screen and (max-width: 992px) {
-  .category-tab {
-    padding: 7px 30px;
-    margin: 5px;
-    font-size: 0.8rem;
-  }
-
   .item-list-card {
     width: 240px;
   }
@@ -65,12 +47,6 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .category-tab {
-    padding: 5px 20px;
-    margin: 3px;
-    font-size: 0.7rem;
-  }
-
   .item-list-card {
     width: 220px;
   }
@@ -86,12 +62,6 @@
 
 /* Extra small devices (phones, 500px and down) */
 @media only screen and (max-width: 500px) {
-  .category-tab {
-    padding: 5px 20px;
-    margin: 3px;
-    font-size: 0.7rem;
-  }
-
   .item-list-card {
     width: 170px;
   }
@@ -103,11 +73,6 @@
 
 /* Too Extra small devices (phones, 400px and down) */
 @media only screen and (max-width: 400px) {
-  .category-tab {
-    padding: 5px 10px;
-    margin: 3px;
-  }
-
   .item-list-card {
     width: 130px;
   }
