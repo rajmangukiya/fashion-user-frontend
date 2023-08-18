@@ -136,7 +136,13 @@ function BasicExample() {
           >{isLogged ? 'My Account' : 'Sign in'}</div>
           <CiSearch className='fs-5' />
           <div style={{cursor: 'pointer'}} className='ms-4 d-flex flex-column justify-content-center position-relative'>
-            <div className='header-cart-count position-absolute'>{getCartCount}</div>
+            {
+              getCartCount > 0 
+              ?
+                <div className='header-cart-count position-absolute'>{getCartCount}</div>
+              :
+                <></>
+            }
             <BsBag onClick={showCart} />
           </div>
           <div ref={hamIcon} className='navbar-ham' onClick={showDropdownMobile} >

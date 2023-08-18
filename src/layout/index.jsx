@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from './footer/Footer'
 import Header from './header/Header'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,11 +11,12 @@ import STORAGEKEY from '../config/storageKey'
 
 const Layout = ({ children, ...props }) => {
 
-    const noAuth = ['/', '/category', '/item', '/collection']
+    const noAuth = ['/', '/category', '/collection']
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
+    const [first, setfirst] = useState(0)
     const urlParams = new URLSearchParams(window.location.search);
     const queryToken = urlParams.get('token');
 
@@ -28,6 +29,7 @@ const Layout = ({ children, ...props }) => {
             console.log(err);
             if (!(noAuth.includes(location.pathname))) {
                 dispatch(logoutAction())
+                console.log('running')
                 navigate('/sign-in')
             }
         })
@@ -38,8 +40,8 @@ const Layout = ({ children, ...props }) => {
             AuthStorage.setStorageJsonData(STORAGEKEY.token, queryToken, true)
             window.location.href = process.env.REACT_APP_CLIENT_ROOT_URL
         }
-        authCheck()
-    }, [])
+        location.pathname != "/sign-in" && authCheck()
+    }, [children])
 
     return (
         <div className='min-vh-100 d-flex flex-column'>

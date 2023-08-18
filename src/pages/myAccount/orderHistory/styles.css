@@ -9,8 +9,12 @@
     object-fit: cover;
 }
 
+.oh-item-title {
+    font-size: 17px;
+}
+
 .oh-item-description {
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .oh-status {
@@ -22,6 +26,11 @@
 .oh-status-circle {
     width: 12px;
     height: 12px;
+}
+
+.oh-item-size {
+    font-size: 14px;
+    background-color: #87695222;
 }
 
 /* Large devices (laptops/desktops, 1200px and down) */

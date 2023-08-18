@@ -1,6 +1,6 @@
 .login-title {
     font-family: 'Ysabeau Office', sans-serif;
-    margin: 100px 0 150px 0 !important;
+    margin: 0 0 150px 0;
     letter-spacing: 10px;
 }
 
@@ -42,7 +42,9 @@
 .login-back-arrow {
     color: #876952;
     cursor: pointer;
-    margin: 50px 0 0 50px;
+    position: absolute;
+    top: 50px;
+    left: 0;
 }
 
 /* Large devices (laptops/desktops, 1200px and down) */
@@ -68,6 +70,10 @@
 
     .login-back-arrow {
         margin-left: 30px;
+    }
+
+    .login-title {
+        margin: 0 0 70px 0;
     }
 }
 

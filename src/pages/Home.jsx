@@ -71,15 +71,11 @@ const Home = () => {
             <MaxCarousel categories={categories} />
 
             {/* New Arrivals Section */}
-            <div style={{textAlign: 'center'}} className=''>
-                <h4 style={{fontSize: '1.2rem'}}>New Arrivals</h4>
-            </div>  
+            <div className='home-carousel-title'>New Arrivals</div>  
             <MinCarousel items={items}/>
 
             {/* Best Selling Section */}
-            <div style={{textAlign: 'center'}} className='pt-5 mb-4'>
-                <h4 style={{fontSize: '1.2rem'}}>Best Selling</h4>
-            </div>  
+            <div className='home-carousel-title mt-5'>Best Selling</div>  
             <MinCarousel items={items}/>
         </div>
     )

@@ -53,10 +53,10 @@ const Login = () => {
   
   
   return (
-    <div className='d-flex flex-column align-items-center vh-100'>
+    <div className='d-flex flex-column align-items-center justify-content-center vh-100'>
       <BiArrowBack
         onClick={() => navigate('/')}
-        className='login-back-arrow fs-2 align-self-baseline' />
+        className='login-back-arrow fs-2' />
       <h1 className='login-title'>LOGIN</h1>
       <div className='login-form d-flex flex-column'>
         <label for='login-email' className='login-label' >Email</label>

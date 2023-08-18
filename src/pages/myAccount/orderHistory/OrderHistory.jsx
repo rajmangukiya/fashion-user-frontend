@@ -77,15 +77,15 @@ const OrderHistory = () => {
                 <div className='oh-item-container d-flex'>
                   <img className='me-5' src={itemDetail?.itemId?.images[0]} />
                   <div className='w-100 d-flex flex-column align-items-start'>
-                    <div className='oh-item-title fs-5 fw-normal mb-1'>{itemDetail?.itemId?.title}</div>
+                    <div className='oh-item-title mb-1'>{itemDetail?.itemId?.title}</div>
                     <div className='oh-item-description mb-1'>{itemDetail?.itemId?.description?.length > 100 ? itemDetail?.itemId?.description?.slice(0, 50) + '...' : itemDetail?.itemId?.description}</div>
                     <div className='d-flex mb-3'>
-                      <div className='oh-item-price fw-bold mb-1 me-3'>₹ {itemDetail?.itemId?.price}</div>
-                      <div className='oh-item-size px-2 me-3 text-black border border-1 border-dark bg-opacity-75 d-flex align-items-center border'>{itemDetail?.size}</div>
+                      <div className='oh-item-price mb-1 me-3'>₹ {itemDetail?.itemId?.price}</div>
                     </div>
-                    <div className='oh-status d-flex align-items-center px-3'>
-                      <div className={`bg-${getStatusColor(order.status)} oh-status-circle rounded-circle me-3`}></div>
-                      <div className={`${getStatusColor(order.status)} py-1`}>{order?.status}</div>
+                    <div className='d-flex'>
+                      <div className='oh-item-size px-2 me-2 d-flex align-items-center'>{itemDetail?.size}</div>
+                      {/* <div className={`bg-${getStatusColor(order.status)} oh-status-circle rounded-circle me-3`}></div> */}
+                      <div className={`oh-item-size px-3 py-1`}>{order?.status}</div>
                     </div>
                   </div>
                 </div>
